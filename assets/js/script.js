@@ -1,5 +1,3 @@
-var googleapiKey = "AIzaSyBxttPCiINqjGfmC3mQcs-MznhmsLTwjyQ"
-
 var bingApiKey = "AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX"
 var weatherApiKey = "64013b468f23baa21fde4b13a3a2c029";
 
