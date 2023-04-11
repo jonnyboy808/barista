@@ -30,12 +30,10 @@ function handleCallingApis(){
     
 }
 // Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
-    
-      var map, searchManager;
-
+var map, searchManager;
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: 'Your Bing Maps Key'
+            credentials: bingApiKey,
         });
     }
 
@@ -101,7 +99,7 @@ function handleCallingApis(){
 
         //Make the geocode request.
         searchManager.geocode(searchRequest);
-    }
+    }git
     
     
     
