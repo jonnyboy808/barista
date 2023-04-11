@@ -3,7 +3,8 @@
     
     
     
-
+    
+    // Jonathan
     function loadMapScenario() {
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
             center: new Microsoft.Maps.Location(37.7749, -122.4194),
@@ -27,4 +28,20 @@
                                     for (var i = 0; i < searchResponse.results.length; i++) {
                                         var coffeePushpin = new Microsoft.Maps.Pushpin(searchResponse.results[i].location, { title: searchResponse.results[i].name });
                                         coffeeLayer.add(coffeePushpin);
-                                 
+                                    }
+                                    map.layers.insert(coffeeLayer);
+                                } else {
+                                    alert('No coffee shops found');
+                                }
+                            },
+                            errorCallback: function (searchRequest) {
+                                alert('Error searching for coffee shops');
+                            }
+                        };
+                        searchManager.search(searchRequest);
+                    }
+                }
+            });
+        });
+    }
+    // Jonathan
