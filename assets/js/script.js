@@ -105,6 +105,8 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("alt", "Weather icon")
     temperatureEl.append(iconImage)
 }
+//This function adds the name and addresses of coffee shops to the page
+
 //Bahareh
 
 var map, searchManager;
