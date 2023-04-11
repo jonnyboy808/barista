@@ -4,15 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Document</title>
 </head>
 <body>
 
     <!-- Header with title: Barista -->
+    <section class="hero is-primary">
+        <div class="hero-body">
+          <p class="title">
+            Barista
+          </p>
+          <p id="weatherTitle">Local Weather</p>
+        </div>
+      </section>
     
     
     <!-- Container for search bar, button, text and search history form for bar and buttons form-->
+
+    <div class="columns">
+        <div class="column">
+            <label class="label">Find the Best Coffee in any City</label>
+            <input class="input is-normal" type="text" placeholder="City, State">
+        </div>
+        <div class="column">
+            <iframe
+            width="500"
+            height="450"
+            style="border: 5px"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA_aNqRNhi-A5P9qp6PYv7NTyGy2YlUTIA&q=tacos,Seattle+WA">
+          </iframe>
+        </div>
+      </div>
+    
+    
+      
 
     <!-- Weather widget only visible when city entered in search bar or when city from previously searched list is clicked -->
 
@@ -25,15 +55,7 @@
 
 
 
- <iframe
-  width="600"
-  height="450"
-  style="border: 5px"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA_aNqRNhi-A5P9qp6PYv7NTyGy2YlUTIA&q=tacos,Seattle+WA">
-</iframe>
+
    
     <script src="./assets/js/script.js"></script>
 </body>
