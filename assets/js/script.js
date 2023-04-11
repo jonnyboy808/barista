@@ -65,7 +65,15 @@ function handleCallingApis(cityName) {
                                     if (response.ok) {
                                         response.json().then(function (bingData) {
                                             var cafeData = bingData.resourceSets[0].resources;
-                                            console.log(cafeData)        
+                                            console.log(cafeData)    
+                                            for(var i = 0; i < cafeData.length ; i++){
+                                                var coffeeShop ={
+                                                    name: cafeData[i].name,
+                                                    coordinate: cafeData[i].point.coordinates,
+                                                    address: cafeData[i].Address.formattedAddress
+                                                }
+                                                console.log(coffeeShop)
+                                            }    
                                         });
                                     } else {
                                         alert("There is a connection error!")
