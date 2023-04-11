@@ -6,5 +6,22 @@
 #myMap {
             height: 500px;
             width: 100%;
+            
         }
         /* jonathan */
+
+.container {
+    padding: 0.5em;
+}
+
+#weather {
+    float:right
+}
+.hero-body {
+    background-color: rgb(120, 63, 7);
+    
+} 
+
+.body {
+    background-image: url(coffee_background.jpeg)
+}
