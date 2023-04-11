@@ -6,9 +6,14 @@
 #myMap {
             height: 500px;
             width: 100%;
+            
         }
         /* jonathan */
 
 .container {
     padding: 0.5em;
+}
+
+#weather {
+    float:right
 }
