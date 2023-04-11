@@ -15,23 +15,26 @@
   <title>Barista</title>
 </head>
 
-<body>
+<body >
 
   <!-- Header with title: Barista -->
   <section class="hero is-primary">
     <div class="hero-body">
-      <p class="title">
+      <p class="title is-size-1">
         Barista
       </p>
       <!-- Weather widget only visible when city entered in search bar or when city from previously searched list is clicked -->
-      <div id="weather"></div>
+      <div id="weather">
+        <p id="city"></p>
+        <p id="temperature"></p>
+      </div>
     </div>
   </section>
 
   
   <!-- Container for search bar, button, text and search history form for bar and buttons form-->
 
-  <div class="columns">
+  <div class="columns mt-2" >
     <div class="column">
       <label class="label">Find the Best Coffee in any City</label>
       <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
@@ -40,10 +43,15 @@
       <div id="searchHistory"></div>
       <!-- new container for coffee shops in area-->
       <!-- Scroll bar -->
-      <div id="coffeeShops"></div>
+      <div class="table-container" >
+        <table class="table" id="coffeeShops">
+          Table here
+          Second Row
+        </table>
+      </div>
    
       <!-- Sound cloud widget -->
-      <div id="soundCloud"></div>
+      <div class="box" id="soundCloud">
       <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay" 
       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%2333cc99&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
     </iframe>
@@ -52,15 +60,27 @@
       <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜" target="_blank" style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a>
     </div>    
   </div>
+</div>
     
-<!-- Map column place holder -->
-  <div class="column"> 
-  <div id="myMap"></div>
-  <div id='output' style="margin-left:10px;float:left;"></div>
+    <!-- Map to take up right half of page -->
+    <div class="column box">
+      <div id="myMap"></div>
+      <div id="searchBoxContainer">
+      <div id='output' style="margin-left:10px;float:left;"></div>
+      </div>
+    </div>
+  </div>
+
+
 
 
 
 </body>
+<script
+src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+crossorigin="anonymous">
+</script>
 <script src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap" async defer></script>
 <script src="./assets/js/script.js"></script>
 
