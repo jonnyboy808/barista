@@ -52,11 +52,13 @@ function handleCallingApis(cityName) {
                             response.json().then(function (todayData) {
                                 var tempFarenheit = parseFloat(((todayData.main.temp - 273) * 1.8) + 32).toFixed(2);
                                 var weatherCondition = {
+                                    city: cityName,
                                     temp: tempFarenheit,
                                     icon: todayData.weather[0].icon
                                 }
+                                showWeatherSituation(weatherCondition)
                                 console.log(coordinates, weatherCondition)
-                            });   
+                            });
                         } else {
                             alert("There is a connection error!")
                         }
@@ -68,6 +70,20 @@ function handleCallingApis(cityName) {
         }
     });
 };
+
+//This function shows the weather condition for current day
+function showWeatherSituation(weatherObj) {
+    var weatherEl = document.getElementById("weather");
+    var cityEl = document.getElementById("city");
+    var temperatureEl = document.getElementById("temperature");
+    cityEl.textContent = weatherObj.city;
+    temperatureEl.textContent = "temperatue: " + weatherObj.temp;
+    var iconImage = document.createElement("img");
+    iconImage.setAttribute("id", "today-weather")
+    iconImage.setAttribute("src", "https://openweathermap.org/img/w/" + weatherObj.icon + ".png");
+    iconImage.setAttribute("alt", "Weather icon")
+    temperatureEl.append(iconImage)
+}
 //Bahareh
 // Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
 
