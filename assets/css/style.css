@@ -17,3 +17,11 @@
 #weather {
     float:right
 }
+.hero-body {
+    background-color: rgb(120, 63, 7);
+    
+} 
+
+.body {
+    background-image: url(coffee_background.jpeg)
+}
