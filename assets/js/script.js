@@ -8,6 +8,9 @@ var searchButton = document.getElementById("searchButton");
 
 searchButton.addEventListener("click", handleSearch);
 
+/*var coffeeShopsEl = document.getElementById("coffeeShops");
+coffeeShopsEl.setAttribute("style", "none");*/
+
 function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
     var cityWordArray = searchedCityValue.split(",");
@@ -112,19 +115,18 @@ function showWeatherSituation(weatherObj) {
 function showcoffeeShop(coffeeShop) {
     console.log(coffeeShop)
     var coffeeShopsEl = document.getElementById("coffeeShops");
+    coffeeShopsEl.setAttribute("style", "overflow-y:auto; border:solid;");
     var parentEl = document.createElement("div");
-    parentEl.setAttribute("class", "cafe");
+    parentEl.setAttribute("class", "row col-xs box row col-xs cafe");
     var coordinate = coffeeShop.coordinate[0] + "," + coffeeShop.coordinate[1];
-    console.log(coordinate)
     parentEl.setAttribute("data-coordinate", coordinate);
-    var cafeName = document.createElement("li");
-    cafeName.setAttribute("class", "title is-6 cafe-name");
-    cafeName.textContent = coffeeShop.name;
-    var cafeAddress = document.createElement("p");
-    cafeAddress.setAttribute("class", "cafe-address");
-    cafeAddress.textContent = coffeeShop.address;
-    parentEl.appendChild(cafeName);
-    parentEl.appendChild(cafeAddress);
+
+    var cafeInfo = document.createElement("div");
+    cafeInfo.setAttribute("class", "box cafe-info");
+    var coffeeImage = "<img src='./assets/images/coffeeIcon.gif' alt='Coffee Image' width='30' height='30'>  ";
+    console.log(coffeeImage)
+    cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name +" : </strong> " + coffeeShop.address;
+    parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
 }
 //Bahareh
@@ -160,7 +162,7 @@ function geocodeQuery(query) {
             if (r && r.results && r.results.length > 0) {
                 var pin, pins = [], locs = [], output = 'Results:<br/>';
 
-                for (var i = 0; i < r.results.length; i++) {
+               /* for (var i = 0; i < r.results.length; i++) {
                     //Create a pushpin for each result. 
                     pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
                         text: i + ''
@@ -175,7 +177,7 @@ function geocodeQuery(query) {
                 map.entities.push(pins);
 
                 //Display list of results
-                document.getElementById('output').innerHTML = output;
+                document.getElementById('output').innerHTML = output;*/
 
                 //Determine a bounding box to best view the results.
                 var bounds;
