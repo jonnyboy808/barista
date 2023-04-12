@@ -75,9 +75,13 @@
     
     <!-- Map to take up right half of page -->
     <div class="column box">
-      <div id="myMap"></div>
-      <div id="searchBoxContainer">
-      <div id='output' style="margin-left:10px;float:left;"></div>
+      <div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;background-color:gray"></div>
+
+      <div style="margin-top:10px;">
+          From: <input id="fromTbx" type="text" value="Redmond, WA"/>
+          To: <input id="toTbx" type="text" value="Bellevue, WA"/>
+          <input type="button" onclick="GetDirections()" value="Calculate" />
+      </div>    
       </div>
     </div>
   </div>
