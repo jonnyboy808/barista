@@ -10,9 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/e6e51f9c43.js" crossorigin="anonymous"></script>
+  
   <link rel="stylesheet" href="./assets/css/style.css" />
   <script src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap" async defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- <script type='text/javascript'
     src='https://www.bing.com/api/maps/mapcontrol?callback=loadMapScenario&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX'
     async defer></script> -->
@@ -37,28 +38,35 @@
 
 
   <!-- Container for search bar, button, text and search history form for bar and buttons form-->
-<div class="container is-one-third">
-  <div class="columns">
+<div class="container">
+  <div class="columns is-two-fifths">
     <div class="column">
       <label class="label">Find the Best Coffee in any City</label>
       <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
       <button class="button is-info mt-2 is-fullwidth" id="searchButton" onclick='Search()'>Search</button>
       <hr>
-      <div id="searchHistory"></div>
+      
+      <ul class="listcontainer" id="searchHistory">
+        <span><h3><b>Recent searches</b></h3></span>
+      </ul>
       <!-- new container for coffee shops in area-->
       <!-- Scroll bar -->
       <div id="coffeeShops" >
+     
 
       </div>
    
+
+  
+              
       <!-- Sound cloud widget -->
       <section class="hero is-info">
-        <div class="hero-body">
+        <div class="hero-body is-small">
           <p class="title">
             Coffee vibe
           </p>
           <p class="subtitle">
-            A little music to brighten your day <i class="fa-solid fa-coffee-beans"></i>
+            A little music to brighten your day 
           </p>
         
       <div class="box" id="soundCloud">
@@ -72,17 +80,12 @@
 </div>
 </div>
 </section>
-    
-    <!-- Map to take up right half of page -->
-    <div class="column box">
-      <div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;background-color:gray"></div>
 
-      <div style="margin-top:10px;">
-          From: <input id="fromTbx" type="text" value="Redmond, WA"/>
-          To: <input id="toTbx" type="text" value="Bellevue, WA"/>
-          <input type="button" onclick="GetDirections()" value="Calculate" />
-      </div>    
-      </div>
+    <!-- Map to take up right half of page -->
+    <div class="column box is-three-fifths">
+      <div id="myMap"></div>
+      <div id="searchBoxContainer">
+      
     </div>
   </div>
 </div>

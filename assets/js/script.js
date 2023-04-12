@@ -3,6 +3,7 @@ var weatherApiKey = "64013b468f23baa21fde4b13a3a2c029";
 
 var citySearch = document.getElementById("searchTbx");
 var searchButton = document.getElementById("searchButton");
+var searchHistory = document.getElementById("searchHistory")
 
 //https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=48.604311,-122.981998,5000&output=json&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX
 
@@ -10,6 +11,86 @@ searchButton.addEventListener("click", handleSearch);
 
 /*var coffeeShopsEl = document.getElementById("coffeeShops");
 coffeeShopsEl.setAttribute("style", "none");*/
+
+// function to make the previous search buttons addPreviousHistory
+
+
+// Refresh page function
+//  Get item from storage
+refreshPage();
+
+function refreshPage() { 
+    var searchList = JSON.parse(localStorage.getItem("searchList"));
+    if (!searchList) {
+        searchHistory.setAttribute("style", "display: none;")
+        
+    } else {
+        searchHistory.setAttribute("style", "display: block;")
+        for (var i = 0; i < searchList.length; i++) {
+            addSearchHistoryBtn(searchList[i])
+        }
+
+    }
+}
+
+function addSearchHistoryBtn(cityName) {
+    var cityBtn = document.createElement("button")
+    cityBtn.setAttribute("data-name", cityName)
+    cityBtn.setAttribute("class", "button is-info mt-2 is-fullwidth history")
+    cityBtn.textContent = cityName
+    searchHistory.appendChild(cityBtn)
+
+}
+
+// call addPreviousHistory function here
+// function saveSearch()
+function saveSearch(cityName) {
+    // var searchList = get item from local storage
+    var searchList = JSON.parse(localStorage.getItem("searchList"));
+    var cityWordArray = cityName.split("%20");
+    cityName = cityWordArray.join(" ");
+    // if falsy then 
+    if (!searchList) {
+        // searchList = [];
+        searchList = [];
+        searchList.push(cityName);
+        // addPreviousHistory() call function here
+        console.log(searchList);
+        // addPreviousHistory(searchList);
+    }
+    //     if length < 3
+   else { 
+       if (searchList.includes(cityName)) {
+        return
+
+       }
+       
+       console.log(searchList);
+        if (searchList.length < 3) {
+            // push the city name to this array
+            searchList.push(cityName);
+        }
+        // remove first item in index 0 from list
+        //  else length is more than 3
+        else {
+            searchList.shift();
+
+            // push cityName to the list 
+            searchList.push(cityName);
+
+            // you have to remove the button of item in index 0
+            // removeButton(0);
+        }
+        // save list in local storage
+        
+        // addPreviousHistory() function call here
+        // addPreviousHistory(searchList);
+    }
+    
+    
+    localStorage.setItem("searchList", JSON.stringify(searchList));
+}
+
 
 function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
@@ -23,7 +104,12 @@ function handleSearch() {
         cityName = arr.join("%20");
         cityWordArray[0] = cityName;
         cityName = cityWordArray.join(",");
-        console.log(cityName)
+
+        // Call saveSearch function here
+        saveSearch(cityName);
+
+        addSearchHistoryBtn(cityName);
+
         //Call APIs
         handleCallingApis(cityName);
     }
