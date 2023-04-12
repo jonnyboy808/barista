@@ -47,3 +47,8 @@ text-overflow: ellipsis;
 .container {
     padding-top: 3em;
 }
+
+.row col-xs box row col-xs {
+    padding: 0;
+}
+
