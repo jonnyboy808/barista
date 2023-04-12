@@ -25,77 +25,27 @@ The Barista webapp dynamically generates all your cafe searching needs based on 
 * [Usage](#usage)
 * [Learning Points](#learning-points)
 * [Author Info](#author-info)
-* [Credits](#credits)
 * [License](#license)
 
 
 ## Code Example
 
 
-
+"Example of code if desired"
 ```html
-<div class="header">
-        <h1>Hori<span class="seo">seo</span>n</h1>
-        <div>
-            <ul>
-                <li>
-                    <a href="#search-engine-optimization">Search Engine Optimization</a>
-                </li>
-                <li>
-                    <a href="#online-reputation-management">Online Reputation Management</a>
-                </li>
-                <li>
-                    <a href="#social-media-marketing">Social Media Marketing</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+Example of html code
 ```
 
-Converting the above non-semantic div with the class of 'header' to an appropriate [<header> semantic element](https://www.w3schools.com/html/html5_semantic_elements.asp). 
-
-```html
-<header>
-        <h1>Hori<span class="seo">seo</span>n</h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="#search-engine-optimization">Search Engine Optimization</a>
-                </li>
-                <li>
-                    <a href="#online-reputation-management">Online Reputation Management</a>
-                </li>
-                <li>
-                    <a href="#social-media-marketing">Social Media Marketing</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
+"Example of code if desired"
+```JS
+Example of js code
 ```
 
-This change require some additional modification to the CSS selector: 
-
+"Example of code if desired"
 ```css
-.header {
-    padding: 20px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #2a607c;
-    color: #ffffff;
-}
+Example of css code
 ```
 
-No longer targeting the element on the page with the class of 'header' but instead the css selector targeting the 'header' element 
-
-```css
-header {
-    padding: 20px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #2a607c;
-    color: #ffffff;
-}
-
-```
 
 ## Usage 
 
@@ -107,31 +57,16 @@ The webapp also auto plays music when the page is initially loaded and will cont
 (add screenshot of soundcloud widget)
 
 Lastly on initial page load, the user's city is automatically displayed in the map, with no need for the user to manually set their city.
-(add screenshot of map example)
-
-```md
-![alt text](assets/images/screenshot.png)
-```
-
+(add screenshot of map example) ![alt text](assets/images/screenshot.png)
 
 ## Learning Points 
 
 
-This is a good place to Explain what you Learned by creating this application.
-This is a great way to remind about all of the Complex Skills you now have.
-If the user is less experienced than you:
-They will be impressed by what you can do!
+"Add if desired"
 
-If the user is more experienced than you:
-They will be impressed by what you can do!
+---
 
-Remember, it is easy to forget exactly how Valuable and Impressive your skills are, as well as How Much You’ve Learned!
-So quantify that here!
-
-
-## Author Info
-
-## Credits
+## Author Info & Credits
 
 An amazing amout of credit is due to the wonderful team that help bring this webpage to life
 Below is each contributors account/s.
@@ -146,18 +81,7 @@ Below is each contributors account/s.
 
 ## License
 
-The last section of a good README is a license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, use [https://choosealicense.com/](https://choosealicense.com/)
-
-
----
-
-
-
-## Features
-
-If your project has a lot of features, consider adding a heading called "Features" and listing them there.
-
-
+License? [https://choosealicense.com/](https://choosealicense.com/)
 
 ---
 
