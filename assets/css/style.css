@@ -1,6 +1,10 @@
-
-
-
+.title {
+font-family: 'Bungee Shade', cursive;
+padding-left: 2em;
+}
+#searchButton {
+    background-color: rgb(82, 54, 7);
+}
 
 /* jonathan */
 #myMap {
@@ -24,4 +28,22 @@
 
 .body {
     background-image: url(coffee_background.jpeg)
+}
+
+.cafeoutputs {
+-webkit-line-clamp: 2;
+
+text-overflow: ellipsis;
+}
+
+.gif {
+    width: 50px;
+    height: 30%
+}
+#city, #temperature {
+    padding-right: 5em;
+}
+
+.container {
+    padding-top: 3em;
 }
