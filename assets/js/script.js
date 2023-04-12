@@ -162,7 +162,7 @@ function geocodeQuery(query) {
             if (r && r.results && r.results.length > 0) {
                 var pin, pins = [], locs = [], output = 'Results:<br/>';
 
-               /* for (var i = 0; i < r.results.length; i++) {
+               for (var i = 0; i < r.results.length; i++) {
                     //Create a pushpin for each result. 
                     pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
                         text: i + ''
@@ -177,7 +177,7 @@ function geocodeQuery(query) {
                 map.entities.push(pins);
 
                 //Display list of results
-                document.getElementById('output').innerHTML = output;*/
+                // document.getElementById('output').innerHTML = output;
 
                 //Determine a bounding box to best view the results.
                 var bounds;

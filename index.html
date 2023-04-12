@@ -11,9 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  
   <script src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap" async defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
   <!-- <script type='text/javascript'
     src='https://www.bing.com/api/maps/mapcontrol?callback=loadMapScenario&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX'
     async defer></script> -->
@@ -23,10 +24,11 @@
 <body>
 
   <!-- Header with title: Barista -->
+  
   <section class="hero is-primary is-small">
     <div class="hero-body">
-      <p class="title is-size-1">
-        Barista <img class="gif" src="./assets/images/coffeeIcon.gif">
+      <p class="title is-1">
+        <img class="barista" src="./assets/images/barista-logo.png">
       </p>
       <!-- Weather widget only visible when city entered in search bar or when city from previously searched list is clicked -->
       <div id="weather">
@@ -36,9 +38,10 @@
     </div>
   </section>
 
-
+  <div class="flexbox">
   <!-- Container for search bar, button, text and search history form for bar and buttons form-->
 <div class="container">
+  <div class="transbox">
   <div class="columns is-two-fifths">
     <div class="column">
       <label class="label">Find the Best Coffee in any City</label>
@@ -64,6 +67,7 @@
       <!-- Sound cloud widget -->
       <section class="hero is-info">
         <div class="hero-body is-small">
+       
           <p class="title">
             Coffee vibe
           </p>
@@ -81,19 +85,23 @@
     </div>   
   </div>
 </div>
+
 </div>
 </section>
 
+
     <!-- Map to take up right half of page -->
-    <div class="column box is-three-fifths">
+    <div class="column is-three-fifths box">
+      
       <div id="myMap"></div>
+      
       <div id="searchBoxContainer">
       
     </div>
   </div>
 </div>
-
-
+</div> <!--transbox div-->
+</div>
 
 
 </body>
