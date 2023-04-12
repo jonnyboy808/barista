@@ -11,6 +11,54 @@ searchButton.addEventListener("click", handleSearch);
 /*var coffeeShopsEl = document.getElementById("coffeeShops");
 coffeeShopsEl.setAttribute("style", "none");*/
 
+// function to make the previous search buttons addPreviousHistory
+
+// Refresh page function
+//  Get item from storage
+var searchList = JSON.parse(localStorage.getItem("searchList"));
+// call addPreviousHistory function here
+// function saveSearch()
+function saveSearch(cityName) {
+    // var searchList = get item from local storage
+    var searchList = JSON.parse(localStorage.getItem("searchList"));
+    // if falsy then 
+    if (!searchList) {
+        // searchList = [];
+        searchList = [];
+        searchList.push(cityName);
+        // addPreviousHistory() call function here
+        console.log(searchList);
+        // addPreviousHistory(searchList);
+    }
+    //     if length < 3
+   else { 
+    console.log(searchList);
+        if (searchList.length < 3) {
+            // push the city name to this array
+            searchList.push(cityName);
+        }
+        // remove first item in index 0 from list
+        //  else length is more than 3
+        else {
+            searchList.shift();
+
+            // push cityName to the list 
+            searchList.push(cityName);
+
+            // you have to remove the button of item in index 0
+            // removeButton(0);
+        }
+        // save list in local storage
+        localStorage.setItem("searchList", JSON.stringify(searchList));
+
+        // addPreviousHistory() function call here
+        // addPreviousHistory(searchList);
+    }
+
+
+}
+
+
 function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
     var cityWordArray = searchedCityValue.split(",");
@@ -23,7 +71,10 @@ function handleSearch() {
         cityName = arr.join("%20");
         cityWordArray[0] = cityName;
         cityName = cityWordArray.join(",");
-        console.log(cityName)
+
+        // Call saveSearch function here
+        saveSearch();
+
         //Call APIs
         handleCallingApis(cityName);
     }
