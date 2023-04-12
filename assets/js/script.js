@@ -3,6 +3,7 @@ var weatherApiKey = "64013b468f23baa21fde4b13a3a2c029";
 
 var citySearch = document.getElementById("searchTbx");
 var searchButton = document.getElementById("searchButton");
+var searchHistory = document.getElementById("searchHistory")
 
 //https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=48.604311,-122.981998,5000&output=json&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX
 
@@ -13,9 +14,34 @@ coffeeShopsEl.setAttribute("style", "none");*/
 
 // function to make the previous search buttons addPreviousHistory
 
+
 // Refresh page function
 //  Get item from storage
-var searchList = JSON.parse(localStorage.getItem("searchList"));
+refreshPage();
+
+function refreshPage() { 
+    var searchList = JSON.parse(localStorage.getItem("searchList"));
+    if (!searchList) {
+        searchHistory.setAttribute("style", "display: none;")
+        
+    } else {
+        searchHistory.setAttribute("style", "display: block;")
+        for (var i = 0; i < searchList.length; i++) {
+            addSearchHistoryBtn(searchList[i])
+        }
+
+    }
+}
+
+function addSearchHistoryBtn(cityName) {
+    var cityBtn = document.createElement("button")
+    cityBtn.setAttribute("data-name", cityName)
+    cityBtn.setAttribute("class", "button is-info mt-2 is-fullwidth history")
+    cityBtn.textContent = cityName
+    searchHistory.appendChild(cityBtn)
+
+}
+
 // call addPreviousHistory function here
 // function saveSearch()
 function saveSearch(cityName) {
@@ -34,7 +60,12 @@ function saveSearch(cityName) {
     }
     //     if length < 3
    else { 
-    console.log(searchList);
+       if (searchList.includes(cityName)) {
+        return
+
+       }
+       
+       console.log(searchList);
         if (searchList.length < 3) {
             // push the city name to this array
             searchList.push(cityName);
@@ -76,6 +107,8 @@ function handleSearch() {
 
         // Call saveSearch function here
         saveSearch(cityName);
+
+        addSearchHistoryBtn(cityName);
 
         //Call APIs
         handleCallingApis(cityName);
