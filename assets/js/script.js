@@ -111,6 +111,7 @@ function showcoffeeShop(coffeeShop){
     var parentEl = document.createElement("div");
     parentEl.setAttribute("class","cafe");
     var coordinate = coffeeShop.coordinate[0]+","+coffeeShop.coordinate[1];
+    console.log(coordinate)
     parentEl.setAttribute("data-coordinate",coordinate);
     var cafeName = document.createElement("li");
     cafeName.setAttribute("class", "title is-6 cafe-name");
