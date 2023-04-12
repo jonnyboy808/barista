@@ -10,9 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/e6e51f9c43.js" crossorigin="anonymous"></script>
+  
   <link rel="stylesheet" href="./assets/css/style.css" />
   <script src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap" async defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- <script type='text/javascript'
     src='https://www.bing.com/api/maps/mapcontrol?callback=loadMapScenario&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX'
     async defer></script> -->
@@ -37,45 +38,54 @@
 
 
   <!-- Container for search bar, button, text and search history form for bar and buttons form-->
-<div class="container is-one-third">
-  <div class="columns">
+<div class="container">
+  <div class="columns is-two-fifths">
     <div class="column">
       <label class="label">Find the Best Coffee in any City</label>
       <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
       <button class="button is-info mt-2 is-fullwidth" id="searchButton" onclick='Search()'>Search</button>
       <hr>
-      <div id="searchHistory"></div>
+      
+      <div class="listcontainer" id="searchHistory">
+        <span><h3><b>Recent searches</b></h3></span>
+        <li><a href="">Coffee shop1</a</li>
+        <li><a href="">coffe shop2</a></li>
+        <li><a href="">coffe shop3</a></li>
+      </div>
       <!-- new container for coffee shops in area-->
       <!-- Scroll bar -->
       <div id="coffeeShops" >
 
       </div>
    
+
+  
+              
       <!-- Sound cloud widget -->
       <section class="hero is-info">
-        <div class="hero-body">
+        <div class="hero-body is-small">
           <p class="title">
             Coffee vibe
           </p>
           <p class="subtitle">
-            A little music to brighten your day <i class="fa-solid fa-coffee-beans"></i>
+            A little music to brighten your day 
           </p>
         
-      <div class="box" id="soundCloud">
-      <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay" 
+      <div class="box is-fluid" id="soundCloud">
+      <iframe width="50%" height="50%" scrolling="no" frameborder="no" allow="autoplay" 
       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%2333cc99&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
     </iframe>
     <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
       <a href="https://soundcloud.com/lofi-hip-hop-music" title="𝗟𝗢𝗙𝗜" target="_blank" style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a> · 
       <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜" target="_blank" style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a>
-    </div>    
+    </div>   
   </div>
 </div>
 </div>
 </section>
-    
+
     <!-- Map to take up right half of page -->
-    <div class="column box">
+    <div class="column box is-three-fifths">
       <div id="myMap"></div>
       <div id="searchBoxContainer">
       <div id='output' style="margin-left:10px;float:left;"></div>
