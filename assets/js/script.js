@@ -65,14 +65,13 @@ function handleCallingApis(cityName) {
                                     if (response.ok) {
                                         response.json().then(function (bingData) {
                                             var cafeData = bingData.resourceSets[0].resources;
-                                            console.log(cafeData)    
                                             for(var i = 0; i < cafeData.length ; i++){
                                                 var coffeeShop ={
                                                     name: cafeData[i].name,
                                                     coordinate: cafeData[i].point.coordinates,
                                                     address: cafeData[i].Address.formattedAddress
                                                 }
-                                                console.log(coffeeShop)
+                                                showcoffeeShop(coffeeShop);
                                             }    
                                         });
                                     } else {
@@ -106,7 +105,24 @@ function showWeatherSituation(weatherObj) {
     temperatureEl.append(iconImage)
 }
 //This function adds the name and addresses of coffee shops to the page
-
+function showcoffeeShop(coffeeShop){
+    console.log(coffeeShop)
+    var coffeeShopsEl = document.getElementById("coffeeShops");
+    var parentEl = document.createElement("div");
+    parentEl.setAttribute("class","cafe");
+    var coordinate = coffeeShop.coordinate[0]+","+coffeeShop.coordinate[1];
+    console.log(coordinate)
+    parentEl.setAttribute("data-coordinate",coordinate);
+    var cafeName = document.createElement("li");
+    cafeName.setAttribute("class", "title is-6 cafe-name");
+    cafeName.textContent = coffeeShop.name;
+    var cafeAddress = document.createElement("p");
+    cafeAddress.setAttribute("class", "cafe-address");
+    cafeAddress.textContent = coffeeShop.address;
+    parentEl.appendChild(cafeName);
+    parentEl.appendChild(cafeAddress);
+    coffeeShopsEl.appendChild(parentEl); 
+}
 //Bahareh
 
 var map, searchManager;
