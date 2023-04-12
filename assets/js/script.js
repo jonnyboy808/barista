@@ -10,6 +10,7 @@ var chainCafeList =["starbucks", "dunkin donuts", "caribou coffee", "dunn bros c
 
 searchButton.addEventListener("click", handleSearch);
 
+
 /*var coffeeShopsEl = document.getElementById("coffeeShops");
 coffeeShopsEl.setAttribute("style", "none");*/
 
@@ -40,6 +41,7 @@ coffeeShopsEl.setAttribute("style", "none");*/
   save list in local storage  
   AddpreviousHistory()
 *////
+
 
 function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
