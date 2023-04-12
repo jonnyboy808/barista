@@ -6,7 +6,7 @@
 
 | Technology Used (API & Framework)         | Resource URL           | 
 | ------------- |:-------------:| 
-| Bing Map API    | [https://learn.microsoft.com/en-us/bingmaps/rest-services/](https://learn.microsoft.com/en-us/bingmaps/rest-services/) | 
+| Microsoft Bing Map API    | [https://learn.microsoft.com/en-us/bingmaps/rest-services/](https://learn.microsoft.com/en-us/bingmaps/rest-services/) | 
 | OpenWeather API     | [https://openweathermap.org/current](https://openweathermap.org/current)      |   
 | SoundCloud Widget API | [https://developers.soundcloud.com/docs/api/html5-widget](https://developers.soundcloud.com/docs/api/html5-widget)     |
 Bulma Framework   | [https://bulma.io/documentation/](https://bulma.io/documentation/)    
@@ -15,13 +15,11 @@ Bulma Framework   | [https://bulma.io/documentation/](https://bulma.io/documenta
 
 [Visit the Deployed Site](https://jonnyboy808.github.io/barista/)
 
-The Barista webapp dynamically generates all your cafe searching needs based on user input. This webapp will display a list of the names and addresss of cafes when a user inputs a city of their choice within the seach box. The user is also greeted by music that auto plays when the page loads and also plays the next song on the playlist to set the mood when searching for their next cafe to try out, additionally if the user chooses they may pause and resume the music as they wish. The weather of the searched city is also displayed above the map to make for a better convinence before the user decides to head out to their new chosen cafe.
+The Barista webapp dynamically generates all your cafe searching needs based on user input. On initial page load the user's current city is displayed in the map produced by Bing™. This webapp will display a list of the names and addresss of cafes when a user inputs a city of their choice within the seach box. The user is also greeted by music that auto plays when the page loads and also plays the next song on the playlist to set the mood when searching for their next cafe. Additionally if the user chooses, they may pause and resume the music as they wish. The weather of the inputed searched city is also displayed above the map to make for a better convinence before the user decides to head out to their new chosen cafe.
 
 
 
-## Table of Contents (Optional)
-
-If your README is very long, add a table of contents to make it easy for users to find what they need.
+## Table of Contents
 
 * [Code Example](#code-example)
 * [Usage](#usage)
@@ -101,9 +99,15 @@ header {
 
 ## Usage 
 
-Provide instructions and examples for use. Include screenshots as needed. 
+Once the deployed site link is clicked, the user can start their search for a new cafe using the search box by entering the city and state of their choosing. The page will dynamically update and display coffee shops of the inputed city, generating the name and adresses in a scroll list. That same search will also produce the current weather conditions of the city with no need to make an additional request.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+(add screenshot of webpage)
+
+The webapp also auto plays music when the page is initially loaded and will continue to play following a set library playlist provided by SoundCloud®. The user can also control the music should they wish to pause or continue playing the sound.
+(add screenshot of soundcloud widget)
+
+Lastly on initial page load, the user's city is automatically displayed in the map, with no need for the user to manually set their city.
+(add screenshot of map example)
 
 ```md
 ![alt text](assets/images/screenshot.png)
@@ -127,37 +131,17 @@ So quantify that here!
 
 ## Author Info
 
-```md
-### Farley Wittles 
-
-
-* [Portfolio](https://youtu.be/bHX54GCrDB4)
-* [LinkedIn](https://youtu.be/bHX54GCrDB4)
-* [Github](https://youtu.be/bHX54GCrDB4)
-```
-
-The user has looked through your whole README, and gotten familiar with your application. 
-This is where you take credit, and make it easy for them to learn more about you!
-Direct them to the following:
-- Your GitHub Profile
-- Your LinkedIn
-- Your Portfolio Website
-- And Anything Else You Want!
-
-
-
 ## Credits
 
 An amazing amout of credit is due to the wonderful team that help bring this webpage to life
-Below is each contributors GitHub account.
+Below is each contributors account/s.
 
-
-- Cassandra: https://github.com/CTep09
-- Jonathan: https://github.com/jonnyboy808/
-- Bahareh: https://github.com/Bhmerir
-- Suchaya: https://github.com/osuchaya
-
-
+```md
+- Cassandra: [Github](https://github.com/CTep09)
+- Jonathan: [Github](https://github.com/jonnyboy808/)
+- Bahareh: [Github](https://github.com/Bhmerir)
+- Suchaya: [Github](https://github.com/osuchaya)
+```
 
 
 ## License
