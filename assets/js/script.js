@@ -8,6 +8,9 @@ var searchButton = document.getElementById("searchButton");
 
 searchButton.addEventListener("click", handleSearch);
 
+/*var coffeeShopsEl = document.getElementById("coffeeShops");
+coffeeShopsEl.setAttribute("style", "none");*/
+
 function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
     var cityWordArray = searchedCityValue.split(",");
@@ -17,11 +20,15 @@ function handleSearch() {
         for (var i = 0; i < arr.length; i++) {
             arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
         }
-        cityName = arr.join(" ");
+        cityName = arr.join("%20");
+        cityWordArray[0] = cityName;
+        cityName = cityWordArray.join(",");
+        console.log(cityName)
         //Call APIs
         handleCallingApis(cityName);
     }
     else {
+        citySearch.value = "";
         alert("A city name should be inserted!")
     }
 }
@@ -30,6 +37,7 @@ function handleSearch() {
 function handleCallingApis(cityName) {
     var coordinates = [];
     var GeoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=" + weatherApiKey;
+    console.log(GeoApiUrl)
     //This fetch brings the response about Geographical coordinates
     fetch(GeoApiUrl).then(function (response) {
         if (response.ok) {
@@ -37,7 +45,7 @@ function handleCallingApis(cityName) {
                 //If the city is not found, the length of data list will be empty
                 if (geoData.length === 0) {
                     alert("The searched city is not found!");
-                    searchedcity.val("");
+                    citySearch.value = "";
                 }
                 else {
                     //If city is found, its longitude and lattitude will be retrieved and sent to the weather API
@@ -59,20 +67,19 @@ function handleCallingApis(cityName) {
                                 showWeatherSituation(weatherCondition)
 
                                 var bingApiUrl = "https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=" + coordinates[0] + "," + coordinates[1] + ",5000&key=" + bingApiKey;
-                                console.log(bingApiUrl)
                                 //This fetch brings the coffee shops
                                 fetch(bingApiUrl).then(function (response) {
                                     if (response.ok) {
                                         response.json().then(function (bingData) {
                                             var cafeData = bingData.resourceSets[0].resources;
-                                            for(var i = 0; i < cafeData.length ; i++){
-                                                var coffeeShop ={
+                                            for (var i = 0; i < cafeData.length; i++) {
+                                                var coffeeShop = {
                                                     name: cafeData[i].name,
                                                     coordinate: cafeData[i].point.coordinates,
                                                     address: cafeData[i].Address.formattedAddress
                                                 }
                                                 showcoffeeShop(coffeeShop);
-                                            }    
+                                            }
                                         });
                                     } else {
                                         alert("There is a connection error!")
@@ -105,98 +112,97 @@ function showWeatherSituation(weatherObj) {
     temperatureEl.append(iconImage)
 }
 //This function adds the name and addresses of coffee shops to the page
-function showcoffeeShop(coffeeShop){
+function showcoffeeShop(coffeeShop) {
     console.log(coffeeShop)
     var coffeeShopsEl = document.getElementById("coffeeShops");
+    coffeeShopsEl.setAttribute("style", "overflow-y:auto; border:solid;");
     var parentEl = document.createElement("div");
-    parentEl.setAttribute("class","cafe");
-    var coordinate = coffeeShop.coordinate[0]+","+coffeeShop.coordinate[1];
-    console.log(coordinate)
-    parentEl.setAttribute("data-coordinate",coordinate);
-    var cafeName = document.createElement("li");
-    cafeName.setAttribute("class", "title is-6 cafe-name");
-    cafeName.textContent = coffeeShop.name;
-    var cafeAddress = document.createElement("p");
-    cafeAddress.setAttribute("class", "cafe-address");
-    cafeAddress.textContent = coffeeShop.address;
-    parentEl.appendChild(cafeName);
-    parentEl.appendChild(cafeAddress);
-    coffeeShopsEl.appendChild(parentEl); 
+    parentEl.setAttribute("class", "row col-xs box row col-xs cafe");
+    var coordinate = coffeeShop.coordinate[0] + "," + coffeeShop.coordinate[1];
+    parentEl.setAttribute("data-coordinate", coordinate);
+
+    var cafeInfo = document.createElement("div");
+    cafeInfo.setAttribute("class", "box cafe-info");
+    var coffeeImage = "<img src='./assets/images/coffeeIcon.gif' alt='Coffee Image' width='30' height='30'>  ";
+    console.log(coffeeImage)
+    cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name +" : </strong> " + coffeeShop.address;
+    parentEl.appendChild(cafeInfo);
+    coffeeShopsEl.appendChild(parentEl);
 }
 //Bahareh
 
 var map, searchManager;
-    function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: bingApiKey,
+function GetMap() {
+    map = new Microsoft.Maps.Map('#myMap', {
+        credentials: bingApiKey,
+    });
+}
+
+function Search() {
+    if (!searchManager) {
+        //Create an instance of the search manager and perform the search.
+        Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+            searchManager = new Microsoft.Maps.Search.SearchManager(map);
+            Search()
         });
+    } else {
+        //Remove any previous results from the map.
+        map.entities.clear();
+
+        //Get the users query and geocode it.
+        var query = document.getElementById('searchTbx').value;
+        geocodeQuery(query);
     }
+}
 
-    function Search() {
-        if (!searchManager) {
-            //Create an instance of the search manager and perform the search.
-            Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
-                searchManager = new Microsoft.Maps.Search.SearchManager(map);
-                Search()
-            });
-        } else {
-            //Remove any previous results from the map.
-            map.entities.clear();
+function geocodeQuery(query) {
+    var searchRequest = {
+        where: query,
+        callback: function (r) {
+            if (r && r.results && r.results.length > 0) {
+                var pin, pins = [], locs = [], output = 'Results:<br/>';
 
-            //Get the users query and geocode it.
-            var query = document.getElementById('searchTbx').value;
-            geocodeQuery(query);
-        }
-    }
+               /* for (var i = 0; i < r.results.length; i++) {
+                    //Create a pushpin for each result. 
+                    pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
+                        text: i + ''
+                    });
+                    pins.push(pin);
+                    locs.push(r.results[i].location);
 
-    function geocodeQuery(query) {
-        var searchRequest = {
-            where: query,
-            callback: function (r) {
-                if (r && r.results && r.results.length > 0) {
-                    var pin, pins = [], locs = [], output = 'Results:<br/>';
-
-                    for (var i = 0; i < r.results.length; i++) {
-                        //Create a pushpin for each result. 
-                        pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
-                            text: i + ''
-                        });
-                        pins.push(pin);
-                        locs.push(r.results[i].location);
-
-                        output += i + ') ' + r.results[i].name + '<br/>';
-                    }
-
-                    //Add the pins to the map
-                    map.entities.push(pins);
-
-                    //Display list of results
-                    document.getElementById('output').innerHTML = output;
-
-                    //Determine a bounding box to best view the results.
-                    var bounds;
-
-                    if (r.results.length == 1) {
-                        bounds = r.results[0].bestView;
-                    } else {
-                        //Use the locations from the results to calculate a bounding box.
-                        bounds = Microsoft.Maps.LocationRect.fromLocations(locs);
-                    }
-
-                    map.setView({ bounds: bounds });
+                    output += i + ') ' + r.results[i].name + '<br/>';
                 }
-            },
-            errorCallback: function (e) {
-                //If there is an error, alert the user about it.
-                alert("No results found.");
-            }
-        };
 
-        //Make the geocode request.
-        searchManager.geocode(searchRequest);
-    }
-    
-    
+                //Add the pins to the map
+                map.entities.push(pins);
+
+                //Display list of results
+                document.getElementById('output').innerHTML = output;*/
+
+                //Determine a bounding box to best view the results.
+                var bounds;
+
+                if (r.results.length == 1) {
+                    bounds = r.results[0].bestView;
+                } else {
+                    //Use the locations from the results to calculate a bounding box.
+                    bounds = Microsoft.Maps.LocationRect.fromLocations(locs);
+                }
+
+                map.setView({ bounds: bounds });
+            }
+        },
+        errorCallback: function (e) {
+            //If there is an error, alert the user about it.
+        //    alert("No results found.");
+        }
+    };
+
+    //Make the geocode request.
+    searchManager.geocode(searchRequest);
+}
+
+
 
 //Bahareh
 //This function shows the weather condition for current day
