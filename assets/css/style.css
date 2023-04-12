@@ -42,11 +42,16 @@ padding-left: 1.5em;
 }
 
 #coffeeShops{
+    display:flex;
+    flex-direction:column;
     height: 300px;
     box-shadow: 5px;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 10px;
+    -webkit-line-clamp: 2;
+    
+    text-overflow: ellipsis;
 }
 
 .cafeoutputs {

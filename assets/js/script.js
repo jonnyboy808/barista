@@ -158,19 +158,19 @@ function Search() {
 function geocodeQuery(query) {
     var searchRequest = {
         where: query,
-        callback: function (r) {
-            if (r && r.results && r.results.length > 0) {
+        callback: function (coordinate) {
+            if (coordinate && coordinate.results && coordinate.results.length > 0) {
                 var pin, pins = [], locs = [], output = 'Results:<br/>';
 
-               for (var i = 0; i < r.results.length; i++) {
+               for (var i = 0; i < coordinate.results.length; i++) {
                     //Create a pushpin for each result. 
-                    pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
+                    pin = new Microsoft.Maps.Pushpin(coordinate.results[i].location, {
                         text: i + ''
                     });
                     pins.push(pin);
-                    locs.push(r.results[i].location);
+                    locs.push(coordinate.results[i].location);
 
-                    output += i + ') ' + r.results[i].name + '<br/>';
+                    output += i + ') ' + coordinate.results[i].name + '<br/>';
                 }
 
                 //Add the pins to the map
