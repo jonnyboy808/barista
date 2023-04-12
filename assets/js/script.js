@@ -3,6 +3,8 @@ var weatherApiKey = "64013b468f23baa21fde4b13a3a2c029";
 
 var citySearch = document.getElementById("searchTbx");
 var searchButton = document.getElementById("searchButton");
+var chainCafeList =["starbucks", "dunkin donuts", "caribou coffee", "dunn bros coffee", "tully's coffee",
+                    "gloria jeans coffee", "mccafe", "lavazza", "peet's coffee"]
 
 //https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=48.604311,-122.981998,5000&output=json&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX
 
@@ -10,6 +12,34 @@ searchButton.addEventListener("click", handleSearch);
 
 /*var coffeeShopsEl = document.getElementById("coffeeShops");
 coffeeShopsEl.setAttribute("style", "none");*/
+
+///function to make the button of AddpreviousHistory
+
+/*function refreshpage{
+  get item fro storage
+  AddpreviousHistory()
+
+*////
+/*function
+  var searchedlist = get item from local storage
+  if falsy then
+    searchlist=[];
+    AddpreviousHistory()
+    push the city name to this array
+  else if{
+    check the length
+    if the length<3
+      push city name tpo the list
+      AddpreviousHistory()
+    else //length is more than three
+        remove item in index 0 from list
+        push cityname to the list  
+        you have to remove the button of item in index 0
+        AddpreviousHistory()
+  }
+  save list in local storage  
+  AddpreviousHistory()
+*////
 
 function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
@@ -23,7 +53,6 @@ function handleSearch() {
         cityName = arr.join("%20");
         cityWordArray[0] = cityName;
         cityName = cityWordArray.join(",");
-        console.log(cityName)
         //Call APIs
         handleCallingApis(cityName);
     }
@@ -37,7 +66,6 @@ function handleSearch() {
 function handleCallingApis(cityName) {
     var coordinates = [];
     var GeoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=" + weatherApiKey;
-    console.log(GeoApiUrl)
     //This fetch brings the response about Geographical coordinates
     fetch(GeoApiUrl).then(function (response) {
         if (response.ok) {
@@ -59,8 +87,10 @@ function handleCallingApis(cityName) {
                         if (response.ok) {
                             response.json().then(function (todayData) {
                                 var tempFarenheit = parseFloat(((todayData.main.temp - 273) * 1.8) + 32).toFixed(2);
+                                var cityWordArray = cityName.split("%20");
+                                var searchedCityValue = cityWordArray.join(" ");
                                 var weatherCondition = {
-                                    city: cityName,
+                                    city: searchedCityValue,
                                     temp: tempFarenheit,
                                     icon: todayData.weather[0].icon
                                 }
@@ -71,14 +101,18 @@ function handleCallingApis(cityName) {
                                 fetch(bingApiUrl).then(function (response) {
                                     if (response.ok) {
                                         response.json().then(function (bingData) {
+                                            var coffeeShopsEl = document.getElementById("coffeeShops");
+                                            coffeeShopsEl.innerHTML = '';
                                             var cafeData = bingData.resourceSets[0].resources;
                                             for (var i = 0; i < cafeData.length; i++) {
-                                                var coffeeShop = {
-                                                    name: cafeData[i].name,
-                                                    coordinate: cafeData[i].point.coordinates,
-                                                    address: cafeData[i].Address.formattedAddress
+                                                if(!chainCafeList.includes(cafeData[i].name.toLowerCase())){
+                                                    var coffeeShop = {
+                                                        name: cafeData[i].name,
+                                                        coordinate: cafeData[i].point.coordinates,
+                                                        address: cafeData[i].Address.formattedAddress
+                                                    }
+                                                    showcoffeeShop(coffeeShop);
                                                 }
-                                                showcoffeeShop(coffeeShop);
                                             }
                                         });
                                     } else {
@@ -113,7 +147,6 @@ function showWeatherSituation(weatherObj) {
 }
 //This function adds the name and addresses of coffee shops to the page
 function showcoffeeShop(coffeeShop) {
-    console.log(coffeeShop)
     var coffeeShopsEl = document.getElementById("coffeeShops");
     coffeeShopsEl.setAttribute("style", "overflow-y:auto; border:solid;");
     var parentEl = document.createElement("div");
@@ -124,7 +157,6 @@ function showcoffeeShop(coffeeShop) {
     var cafeInfo = document.createElement("div");
     cafeInfo.setAttribute("class", "box cafe-info");
     var coffeeImage = "<img src='./assets/images/coffeeIcon.gif' alt='Coffee Image' width='30' height='30'>  ";
-    console.log(coffeeImage)
     cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name +" : </strong> " + coffeeShop.address;
     parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
