@@ -29,26 +29,42 @@ padding-left: 2em;
 .body {
     background-image: url(coffee_background.jpeg)
 }
+.cafe{
+    margin-bottom: 20px;
+}
+
+.cafe-info{
+    height: 80px;
+}
+
+#coffeeShops{
+    height: 300px;
+    box-shadow: 5px;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
 
 .cafeoutputs {
--webkit-line-clamp: 2;
-
-text-overflow: ellipsis;
-}
-
-.gif {
-    width: 50px;
-    height: 30%
-}
-#city, #temperature {
-    padding-right: 5em;
-}
-
-.container {
-    padding-top: 3em;
-}
-
-.row col-xs box row col-xs {
-    padding: 0;
-}
-
+    -webkit-line-clamp: 2;
+    
+    text-overflow: ellipsis;
+    }
+    
+    .gif {
+        width: 50px;
+        height: 30%
+    }
+    #city, #temperature {
+        padding-right: 5em;
+    }
+    
+    .container {
+        padding-top: 3em;
+    }
+    
+    .row col-xs box row col-xs {
+        padding: 0;
+    }
+    
+    

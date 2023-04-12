@@ -37,69 +37,52 @@
 
 
   <!-- Container for search bar, button, text and search history form for bar and buttons form-->
-  <div class="container is-one-third">
-    <div class="columns">
-      <div class="column">
-        <label class="label">Find the Best Coffee in any City</label>
-        <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
-        <button class="button is-info mt-2 is-fullwidth" id="searchButton" onclick='Search()'>Search</button>
-        <hr>
-        <div id="searchHistory"></div>
-        <!-- new container for coffee shops in area-->
-        <!-- Scroll bar -->
-        <div class="table-container">
-          <table class="table" id="coffeeShops">
-            <div class="cafeoutputs" style="overflow-y:scroll;">
-              <h4><strong>cafe name</strong> Cafe Redhouse</h4>
-              cafe address 344 Bean road, San Francisco 94111 <i class="fa-solid fa-coffee-bean" style="color: #51371f;"></i>
-              
-            </div>
-          </table>
-        </div>
-        <div class="row col-xs box row col-xs">
-               <div class="box" class="style="overflow-y:scroll>
-                 <p>cafe name</p>
-              <p>cafe address</p>
-              
-        </div>
+<div class="container is-one-third">
+  <div class="columns">
+    <div class="column">
+      <label class="label">Find the Best Coffee in any City</label>
+      <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
+      <button class="button is-info mt-2 is-fullwidth" id="searchButton" onclick='Search()'>Search</button>
+      <hr>
+      <div id="searchHistory"></div>
+      <!-- new container for coffee shops in area-->
+      <!-- Scroll bar -->
+      <div id="coffeeShops" >
 
-        </div>
-
-        <!-- Sound cloud widget -->
-        <section class="hero is-info">
-          <div class="hero-body">
-            <p class="title">
-              Coffee vibe
-            </p>
-            <p class="subtitle">
-              A little music to brighten your day <i class="fa-solid fa-coffee-beans"></i>
-            </p>
-
-            <div class="box" id="soundCloud">
-              <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%2333cc99&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-              </iframe>
-              <div
-                style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-                <a href="https://soundcloud.com/lofi-hip-hop-music" title="𝗟𝗢𝗙𝗜" target="_blank"
-                  style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a> ·
-                <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜"
-                  target="_blank" style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a>
-              </div>
-            </div>
-          </div>
       </div>
-      </section>
-
-      <!-- Map to take up right half of page -->
-      <div class="column box">
-        <div id="myMap"></div>
-        <div id="searchBoxContainer">
-          <div id='output' style="margin-left:10px;float:left;"></div>
-        </div>
+   
+      <!-- Sound cloud widget -->
+      <section class="hero is-info">
+        <div class="hero-body">
+          <p class="title">
+            Coffee vibe
+          </p>
+          <p class="subtitle">
+            A little music to brighten your day <i class="fa-solid fa-coffee-beans"></i>
+          </p>
+        
+      <div class="box" id="soundCloud">
+      <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%2333cc99&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+    </iframe>
+    <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+      <a href="https://soundcloud.com/lofi-hip-hop-music" title="𝗟𝗢𝗙𝗜" target="_blank" style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a> · 
+      <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜" target="_blank" style="color: #cccccc; text-decoration: none;">𝗟𝗢𝗙𝗜</a>
+    </div>    
+  </div>
+</div>
+</div>
+</section>
+    
+    <!-- Map to take up right half of page -->
+    <div class="column box">
+      <div id="myMap"></div>
+      <div id="searchBoxContainer">
+      <div id='output' style="margin-left:10px;float:left;"></div>
       </div>
     </div>
   </div>
+</div>
 
 
 
