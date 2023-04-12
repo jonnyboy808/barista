@@ -21,6 +21,8 @@ var searchList = JSON.parse(localStorage.getItem("searchList"));
 function saveSearch(cityName) {
     // var searchList = get item from local storage
     var searchList = JSON.parse(localStorage.getItem("searchList"));
+    var cityWordArray = cityName.split("%20");
+    cityName = cityWordArray.join(" ");
     // if falsy then 
     if (!searchList) {
         // searchList = [];
@@ -49,13 +51,13 @@ function saveSearch(cityName) {
             // removeButton(0);
         }
         // save list in local storage
-        localStorage.setItem("searchList", JSON.stringify(searchList));
-
+        
         // addPreviousHistory() function call here
         // addPreviousHistory(searchList);
     }
-
-
+    
+    
+    localStorage.setItem("searchList", JSON.stringify(searchList));
 }
 
 
@@ -73,7 +75,7 @@ function handleSearch() {
         cityName = cityWordArray.join(",");
 
         // Call saveSearch function here
-        saveSearch();
+        saveSearch(cityName);
 
         //Call APIs
         handleCallingApis(cityName);
