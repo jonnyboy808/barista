@@ -49,15 +49,15 @@ Example of css code
 
 ## Usage 
 
-Once the deployed site link is clicked, the user can start their search for a new cafe using the search box by entering the city and state of their choosing. The page will dynamically update and display coffee shops of the inputed city, generating the name and adresses in a scroll list. That same search will also produce the current weather conditions of the city with no need to make an additional request.
-
-(add screenshot of webpage)
+Once the deployed site link is clicked, the user can start their search for a new cafe using the search box by entering the city of their choosing. The page will dynamically update and display coffee shops of the inputed city, generating the name and adresses in a scroll list. That same search will also produce the current weather conditions of the city located in the top right of the image below, with no need to make an additional request.
+![Fully Functional](assets/images/fully_functional.png)
 
 The webapp also auto plays music when the page is initially loaded and will continue to play following a set library playlist provided by SoundCloud®. The user can also control the music should they wish to pause or continue playing the sound.
-(add screenshot of soundcloud widget)
+
+![SoundCloud Widget](assets/images/music.png)
 
 Lastly on initial page load, the user's city is automatically displayed in the map, with no need for the user to manually set their city.
-(add screenshot of map example) ![alt text](assets/images/screenshot.png)
+![Initial Page Load](assets/images/initial_load.png)
 
 ## Learning Points 
 
