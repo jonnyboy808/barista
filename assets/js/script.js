@@ -6,12 +6,11 @@ var coffeeShopsData = [];
 var citySearch = document.getElementById("searchTbx");
 var searchButton = document.getElementById("searchButton");
 var searchHistory = document.getElementById("searchHistory");
+var weatherEl = document.getElementById("weather");
+var coffeeShopsEl = document.getElementById("coffeeShops");
 
 var chainCafeList = ["starbucks", "dunkin donuts", "caribou coffee", "dunn bros coffee", "tully's coffee",
     "gloria jeans coffee", "mccafe", "lavazza", "peet's coffee"]
-
-
-//https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=48.604311,-122.981998,5000&output=json&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX
 
 //-----------------------event listeners----------------------------------
 searchButton.addEventListener("click", handleSearch);
@@ -24,6 +23,8 @@ searchHistory.addEventListener("click", function(event){
         handleCallingApis(cityName);
     }
 })
+
+
 //------------------------------------------------------------------------
 refreshPage();
 //This function when the page loads show the search history if exists
@@ -74,6 +75,7 @@ function saveSearch(cityName) {
             
             searchList.shift();
             searchList.push(cityName);  
+            console.log(cityName);
             //The oldest history button will be deleted    
             searchHistory.children[1].remove();
         }
@@ -99,7 +101,6 @@ function handleSearch() {
         // Call saveSearch function here
         saveSearch(cityName);
         // Search(searchedCityValue);
-        addSearchHistoryBtn(cityName);
         coffeeShopsData = [];
         //Call APIs
         handleCallingApis(cityName);
@@ -109,7 +110,6 @@ function handleSearch() {
         alert("A city name should be inserted!")
     }
 }
-//Bahareh
 //----------------------------------- Handle calling APIs  ---------------------------------
 
 function handleCallingApis(cityName) {
@@ -162,6 +162,8 @@ function handleCallingApis(cityName) {
                                                 }
                                                 coffeeShopsData.push(coffeeShop);
                                                 showcoffeeShop(coffeeShop);
+                                                var cityWordArray = cityName.split("%20");
+                                                cityName = cityWordArray.join(" ");
                                                 Search(cityName)
                                             }
                                         });
@@ -195,9 +197,9 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("alt", "Weather icon")
     temperatureEl.append(iconImage)
 }
+
 //This function adds the name and addresses of coffee shops to the page
 function showcoffeeShop(coffeeShop) {
-    var coffeeShopsEl = document.getElementById("coffeeShops");
     coffeeShopsEl.setAttribute("style", "overflow-y:auto; border:solid;");
     var parentEl = document.createElement("div");
     parentEl.setAttribute("class", "row col-xs box row col-xs cafe");
@@ -211,7 +213,6 @@ function showcoffeeShop(coffeeShop) {
     parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
 }
-//Bahareh
 
 var map, searchManager;
 var pins, locs = [];
@@ -240,10 +241,6 @@ function Search(cityName) {
     }
 }
 
-function test() {
-    
-}
-
 function geocodeQuery(query) {
     var searchRequest = {
         where: query,
@@ -265,31 +262,8 @@ function geocodeQuery(query) {
 
                     pins.push(pin);
                     locs.push(location);
-
-                    // output += i + ') ' + r.results[i].name + '<br/>';
                 }
-
-            //    for (var i = 0; i < r.results.length; i++) {
-            //         //Create a pushpin for each result. 
-            //         pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
-            //             text: i + ''
-            //         });
-            //         pins.push(pin);
-            //         locs.push(r.results[i].location);
-
-            //         // output += i + ') ' + r.results[i].name + '<br/>';
-            //     }
-                // console.log(pins);
-
-                //Add the pins to the map
                 map.entities.push(pins);
-                // Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
-                //     e.target.setOptions({ color: 'red' });
-                // });
-
-                //Display list of results
-                // document.getElementById('output').innerHTML = output;
-
                 //Determine a bounding box to best view the results.
                 var bounds;
 
@@ -313,9 +287,6 @@ function geocodeQuery(query) {
     searchManager.geocode(searchRequest);
 }
 
-
-
-//Bahareh
 //This function shows the weather condition for current day
 function showWeatherSituation(weatherObj) {
     var cityEl = document.getElementById("city");
@@ -328,6 +299,5 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("alt", "Weather icon")
     temperatureEl.append(iconImage)
 }
-//Bahareh
 // Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
 
