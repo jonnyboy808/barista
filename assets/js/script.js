@@ -173,14 +173,14 @@ function handleCallingApis(cityName) {
                                                         coordinate: cafeData[i].point.coordinates,
                                                         address: cafeData[i].Address.formattedAddress
                                                     }
-                                                    console.log(coffeeShop)
                                                     coffeeShopsData.push(coffeeShop);
                                                     showcoffeeShop(coffeeShop);
-                                                    var cityWordArray = cityName.split("%20");
-                                                    cityName = cityWordArray.join(" ");
-                                                    Search(cityName);
                                                 }
+                                                
                                             }
+                                            var cityWordArray = cityName.split("%20");
+                                                cityName = cityWordArray.join(" ");
+                                                Search(cityName)
                                         });
                                     } else {
                                         // alert("There is a connection error!")
@@ -298,14 +298,14 @@ function geocodeQuery(query) {
                     var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
                     // console.log(location);
 
-                        pin = new Microsoft.Maps.Pushpin(location, {
-                            title: coffeeShopsData[i].name,
-                            text: i + ''
-                        });
+                    pin = new Microsoft.Maps.Pushpin(location, {
+                        title: coffeeShopsData[i].name,
+                        text: i + ''
+                    });
 
-                        pins.push(pin);
-                        locs.push(location);
-                    }
+                    pins.push(pin);
+                    locs.push(location);
+                }
                 map.entities.push(pins);
                 //Determine a bounding box to best view the results.
                 var bounds;
@@ -329,6 +329,7 @@ function geocodeQuery(query) {
     //Make the geocode request.
     searchManager.geocode(searchRequest);
 }
+
 
 //This function shows the weather condition for current day
 function showWeatherSituation(weatherObj) {
