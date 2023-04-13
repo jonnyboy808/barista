@@ -127,8 +127,14 @@ function handleCallingApis(cityName) {
             response.json().then(function (geoData) {
                 //If the city is not found, the length of data list will be empty
                 if (geoData.length === 0) {
-                    alert("The searched city is not found!");
+                    // alert("The searched city is not found!");
                     citySearch.value = "";
+                    var searchedCityModal = document.getElementById('searchedCityModal');
+                    searchedCityModal.classList.add('is-active');
+                    searchedCityModal.querySelector('.modal-close').addEventListener('click', function() {
+                        searchedCityModal.classList.remove('is-active');
+                    })
+
                 }
                 else {
                     //If city is found, its longitude and lattitude will be retrieved and sent to the weather API
