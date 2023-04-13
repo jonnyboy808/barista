@@ -6,13 +6,18 @@
 #searchButton {
     background-color: rgb(82, 54, 7);
 }
+.button.button.is-info.mt-2.is-fullwidth.history {
+    background-color: rgb(104, 63, 2);
+}
 
 /* jonathan */
 #myMap {
     height: 58%;
     width: 100%;
 }
-
+.recent {
+    font-size: 23px;
+}
 /* jonathan */
 
 .container {
@@ -39,14 +44,15 @@
 }
 
 .body {
-    background-image: url(./assets/images/coffee_background.jpeg)
+    
+    height: 100%
 }
 
 .cafe {
     margin-bottom: 20px;
 }
 
-.cafe-info{
+.cafe-info {
     /* height: 80px; */
 }
 
@@ -63,6 +69,7 @@
     text-overflow: ellipsis;
 }
 
+
 .cafeoutputs {
     -webkit-line-clamp: 2;
 
@@ -76,7 +83,7 @@
 
 .container {
     padding-top: 3em;
-    z-index: 3;
+ 
     margin-top: 10px;
     padding-top: 0px;
 }
@@ -101,10 +108,15 @@
     box-sizing: 50px;
 
 }
+.body {
+    background-color: blanchedalmond;
+    
+}
 
 .flexbox {
     background-color: blanchedalmond;
-}
+    height: 100vh;
+} 
 
 .box {
     padding: 0.75rem;

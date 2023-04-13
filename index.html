@@ -42,8 +42,8 @@
   <div class="flexbox">
     <!-- Container for search bar, button, text and search history form for bar and buttons form-->
     <div class="container">
-      <div class="columns is-two-fifths">
-        <div class="column">
+      <div class="columns">
+        <div class="column is-two-fifths">
           <label class="label">Find the Best Coffee in any City</label>
           <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
           <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
@@ -85,8 +85,8 @@
 
 
           <ul class="listcontainer" id="searchHistory">
-            <span>
-              <h3 ><b>Recent searches</b></h3>
+            <span class="recent">
+              <h3><b>Recent searches</b></h3>
             </span>
           </ul>
           <!-- new container for coffee shops in area-->
@@ -95,17 +95,18 @@
 
           </div>
 
-          
+
         </div>
         </section>
         <!--changed part-->
         <!-- Map to take up right half of page -->
-        <div class="column box is-third-fifths second-column">
+        <div class="column box second-column is-third-fifths">
           <div id="myMap"></div>
+
           <!-- Sound cloud widget -->
           <section class="hero is-info sound">
             <div class="hero-body is-small">
-              <p class="title is-3" >
+              <p class="title is-3">
                 Coffee vibe
               </p>
               <p class="subtitle">
@@ -124,9 +125,9 @@
               </div>
             </div>
         </div>
-
-
       </div>
+
+    </div>
 
 </body>
 
