@@ -43,8 +43,8 @@
     margin-bottom: 20px;
 }
 
-.cafe-info {
-    height: 80px;
+.cafe-info{
+    /* height: 80px; */
 }
 
 #coffeeShops {
@@ -104,6 +104,7 @@
 
 .box {
     padding: 0.75rem;
+    padding-top: 0.3rem;
 }
 
 .barista {
