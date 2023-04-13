@@ -17,7 +17,7 @@ searchHistory.addEventListener("click", function(event){
     var element = event.target;
     if(element.matches(".history")){
         var cityName = element.textContent;
-        
+        Search(cityName);
         handleCallingApis(cityName);
     }
 })
@@ -41,7 +41,6 @@ function addSearchHistoryBtn(cityName) {
     searchHistory.setAttribute("style", "display: block;")
     var cityWordArray = cityName.split("%20");
     cityName = cityWordArray.join(" ");
-    console.log("addSearchHistoryBtn")
     var cityBtn = document.createElement("button")
     cityBtn.setAttribute("class", "button is-info mt-2 is-fullwidth history")
     cityBtn.textContent = cityName
@@ -51,10 +50,8 @@ function addSearchHistoryBtn(cityName) {
 //This function brings the history of search from local storage
 function saveSearch(cityName) {
     var searchList = JSON.parse(localStorage.getItem("searchList"));
-    console.log(cityName)
     var cityWordArray = cityName.split("%20");
     cityName = cityWordArray.join(" ");
-    console.log(cityName)
     //if there is no history, an empty list is made and the item will be added to it
     if (!searchList) {
         searchList = [];
@@ -98,7 +95,7 @@ function handleSearch() {
 
         // Call saveSearch function here
         saveSearch(cityName);
-
+        Search(searchedCityValue);
         //Call APIs
         handleCallingApis(cityName);
     }
@@ -216,19 +213,19 @@ function GetMap() {
     });
 }
 
-function Search() {
+function Search(cityName) {
     if (!searchManager) {
         //Create an instance of the search manager and perform the search.
         Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             searchManager = new Microsoft.Maps.Search.SearchManager(map);
-            Search()
+            Search(cityName)
         });
     } else {
         //Remove any previous results from the map.
         map.entities.clear();
 
         //Get the users query and geocode it.
-        var query = document.getElementById('searchTbx').value;
+        var query = cityName;//document.getElementById('searchTbx').value;
         geocodeQuery(query);
     }
 }
