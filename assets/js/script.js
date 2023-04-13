@@ -107,7 +107,13 @@ function handleSearch() {
     }
     else {
         citySearch.value = "";
-        alert("A city name should be inserted!")
+        // alert("A city name should be inserted!")
+        // Added modal to alert user
+        var searchAlertModal = document.getElementById('searchAlertModal');
+        searchAlertModal.classList.add('is-active');
+        searchAlertModal.querySelector('.modal-close').addEventListener('click', function() {
+            searchAlertModal.classList.remove('is-active');
+        })
     }
 }
 //----------------------------------- Handle calling APIs  ---------------------------------
