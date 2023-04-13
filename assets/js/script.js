@@ -160,17 +160,19 @@ function handleCallingApis(cityName) {
                                             var cafeData = bingData.resourceSets[0].resources;
                                             console.log(cafeData);
                                             for (var i = 0; i < cafeData.length; i++) {
-                                                var coffeeShop = {
-                                                    name: cafeData[i].name,
-                                                    coordinate: cafeData[i].point.coordinates,
-                                                    address: cafeData[i].Address.formattedAddress
+                                                if(!chainCafeList.includes(cafeData[i].name.toLowerCase())){
+                                                    var coffeeShop = {
+                                                        name: cafeData[i].name,
+                                                        coordinate: cafeData[i].point.coordinates,
+                                                        address: cafeData[i].Address.formattedAddress
+                                                    }
+                                                    console.log(coffeeShop)
+                                                    coffeeShopsData.push(coffeeShop);
+                                                    showcoffeeShop(coffeeShop);
+                                                    var cityWordArray = cityName.split("%20");
+                                                    cityName = cityWordArray.join(" ");
+                                                    Search(cityName);
                                                 }
-                                                console.log(coffeeShop)
-                                                coffeeShopsData.push(coffeeShop);
-                                                showcoffeeShop(coffeeShop);
-                                                var cityWordArray = cityName.split("%20");
-                                                cityName = cityWordArray.join(" ");
-                                                Search(cityName)
                                             }
                                         });
                                     } else {
@@ -201,7 +203,7 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("id", "today-weather")
     iconImage.setAttribute("src", "https://openweathermap.org/img/w/" + weatherObj.icon + ".png");
     iconImage.setAttribute("alt", "Weather icon")
-    temperatureEl.append(iconImage)
+    temperatureEl.appendChild(iconImage)
 }
 
 //This function adds the name and addresses of coffee shops to the page

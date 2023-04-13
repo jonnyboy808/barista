@@ -25,9 +25,9 @@
 <body>
 
   <!-- Header with title: Barista -->
-  
+
   <section class="hero is-primary is-small">
-    <div class="hero-body">
+    <div class="hero-body is-flex is-justify-content-space-between">
       <p class="title is-1">
         <img class="barista" src="./assets/images/barista-logo.png">
       </p>
@@ -40,58 +40,55 @@
   </section>
 
   <div class="flexbox">
-  <!-- Container for search bar, button, text and search history form for bar and buttons form-->
-  <div class="container">
-    <div class="columns is-two-fifths">
-      <div class="column">
-        <label class="label">Find the Best Coffee in any City</label>
-        <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
-        <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
-        <hr>
+    <!-- Container for search bar, button, text and search history form for bar and buttons form-->
+    <div class="container">
+      <div class="columns is-two-fifths">
+        <div class="column">
+          <label class="label">Find the Best Coffee in any City</label>
+          <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
+          <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
+          <hr>
 
-        <ul class="listcontainer" id="searchHistory">
-          <span>
-            <h3><b>Recent searches</b></h3>
-          </span>
-        </ul>
-        <!-- new container for coffee shops in area-->
-        <!-- Scroll bar -->
-        <div id="coffeeShops">
+          <ul class="listcontainer" id="searchHistory">
+            <span>
+              <h3><b>Recent searches</b></h3>
+            </span>
+          </ul>
+          <!-- new container for coffee shops in area-->
+          <!-- Scroll bar -->
+          <div id="coffeeShops">
 
-        </div>
+          </div>
 
-        <!-- Sound cloud widget -->
-        <section class="hero is-info">
-          <div class="hero-body is-small">
-            <p class="title">
-              Coffee vibe
-            </p>
-            <p class="subtitle">
-              A little music to brighten your day
-            </p>
+          <!-- Sound cloud widget -->
+          <section class="hero is-info"> 
+            <div class="hero-body is-small"> 
+              <p class="title">
+                Coffee vibe
+              </p>
+              <p class="subtitle">
+                A little music to brighten your day
+              </p>
 
-            <div class="box" id="soundCloud">
-              <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%23be8d34&auto_play=true&sharing=false&hide_related=true&show_user=false&show_reposts=false&buying=false">
-              </iframe>
-              <div
-                style="font-size: 8px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
-                <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜"
-                  target="_blank" style="color: #be8d34; text-decoration: overline;">𝗟𝗢𝗙𝗜</a>
+              <div class="box" id="soundCloud">
+                <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay"
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%23be8d34&auto_play=true&sharing=false&hide_related=true&show_user=false&show_reposts=false&buying=false">
+                </iframe>
+                <div
+                  style="font-size: 8px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+                  <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜"
+                    target="_blank" style="color: #be8d34; text-decoration: overline;">𝗟𝗢𝗙𝗜</a>
+                </div>
               </div>
             </div>
-          </div>
-      </div>
-      </section>
+          </div> 
+        </section> 
 
-      <!-- Map to take up right half of page -->
-      <div class="column box is-three-fifths">
-        <div id="myMap"></div>
-        <div id="searchBoxContainer">
-
+        <!-- Map to take up right half of page -->
+        <div class="column box is-three-fifths">
+          <div id="myMap"></div>
         </div>
       </div>
-    </div>
 
 </body>
 

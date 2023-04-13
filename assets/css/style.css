@@ -1,96 +1,100 @@
 .title {
-font-family: 'Bungee Shade', cursive;
-padding-left: 1.5em;
+    font-family: 'Bungee Shade', cursive;
+    padding-left: 1.5em;
 }
+
 #searchButton {
     background-color: rgb(82, 54, 7);
 }
 
 /* jonathan */
 #myMap {
-            height: 75%;
-            width: 100%;   
-        }
-        /* jonathan */
+    height: 50%;
+    width: 100%;
+}
+
+/* jonathan */
 
 .container {
     padding: 0.5em;
 }
 
 #weather {
-    float:right;
-    display:inline;
+    float: right;
+    display: inline;
 }
+
 .hero-body {
     background-color: rgb(120, 63, 7);
     display: inline;
     font-size: x-large;
 }
+
 .listcontainer {
     list-style: none;
     padding-bottom: 1rem;
 }
+
 .body {
     background-image: url(./assets/images/coffee_background.jpeg)
 }
-.cafe{
+
+.cafe {
     margin-bottom: 20px;
 }
 
-.cafe-info{
+.cafe-info {
     height: 80px;
 }
 
-#coffeeShops{
-    display:flex;
-    flex-direction:column;
+#coffeeShops {
+    display: flex;
+    flex-direction: column;
     height: 300px;
     box-shadow: 5px;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 10px;
     -webkit-line-clamp: 2;
-    
+
     text-overflow: ellipsis;
 }
 
 .cafeoutputs {
     -webkit-line-clamp: 2;
-    
-    text-overflow: ellipsis;
-    }
-    
-    .gif {
-        width: 50px;
-        height: 30%
-    }
-    #city, #temperature {
-        padding-right: 12em;
-    }
-    
-    .container {
-        padding-top: 3em;
-        z-index: 3;
-        
-        
-    }
 
-    .row col-xs col-xs {
-        padding: 0;
-    }
-    
-    #soundcloud {
-        height: 80px;
-        width: 80px;
-       
-    }
-   
+    text-overflow: ellipsis;
+}
+
+.gif {
+    width: 50px;
+    height: 30%
+}
+
+.container {
+    padding-top: 3em;
+    z-index: 3;
+
+
+}
+
+.row col-xs col-xs {
+    padding: 0;
+}
+
+#soundcloud {
+    height: 80px;
+    width: 80px;
+
+}
+
 .columns {
     column-gap: 2rem;
-    
+
 }
-.box #soundCloud  {
-box-sizing: 50px;
+
+.box #soundCloud {
+    box-sizing: 50px;
 
 }
 
@@ -101,7 +105,11 @@ box-sizing: 50px;
 .box {
     padding: 0.75rem;
 }
+
 .barista {
-  height:100px
-  
+    height: 100px
+}
+
+.label{
+    font-size: 24px;
 }
