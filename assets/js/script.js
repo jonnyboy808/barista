@@ -180,18 +180,34 @@ function handleCallingApis(cityName) {
                                             }
                                         });
                                     } else {
-                                        alert("There is a connection error!")
+                                        // alert("There is a connection error!")
+                                        var connectionError = document.getElementById('connectionError');
+                                        connectionError.classList.add('is-active');
+                                        connectionError.querySelector('modal-close').addEventListener('click', function() {
+                                            connectionError.classList.remove('is-active');
+                                        })
+                                        
                                     }
                                 });
                             });
                         } else {
-                            alert("There is a connection error!")
+                            // alert("There is a connection error!")
+                            var connectionError = document.getElementById('connectionError');
+                            connectionError.classList.add('is-active');
+                            connectionError.querySelector('modal-close').addEventListener('click', function() {
+                                connectionError.classList.remove('is-active');
+                            })
                         }
                     });
                 }
             });
         } else {
-            alert("There is a connection error!")
+            // alert("There is a connection error!")
+            var connectionError = document.getElementById('connectionError');
+            connectionError.classList.add('is-active');
+            connectionError.querySelector('modal-close').addEventListener('click', function() {
+                connectionError.classList.remove('is-active');
+            })
         }
     });
 };
