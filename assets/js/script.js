@@ -15,12 +15,13 @@ var chainCafeList = ["starbucks", "dunkin donuts", "caribou coffee", "dunn bros 
 //-----------------------event listeners----------------------------------
 searchButton.addEventListener("click", handleSearch);
 
-searchHistory.addEventListener("click", function(event){
+searchHistory.addEventListener("click", function (event) {
     var element = event.target;
-    if(element.matches(".history")){
+    if (element.matches(".history")) {
         var cityName = element.textContent;
         Search(cityName);
         handleCallingApis(cityName);
+        coffeeShopsData = [];
     }
 })
 
@@ -72,10 +73,9 @@ function saveSearch(cityName) {
         else {
             /*if the search history list already has 3 items, the item in index 0 that is the oldest history 
             will be deleted, and the recent search will be added to the list*/
-            
+
             searchList.shift();
-            searchList.push(cityName);  
-            console.log(cityName);
+            searchList.push(cityName);
             //The oldest history button will be deleted    
             searchHistory.children[1].remove();
         }
@@ -167,13 +167,15 @@ function handleCallingApis(cityName) {
                                             var cafeData = bingData.resourceSets[0].resources;
                                             console.log(cafeData);
                                             for (var i = 0; i < cafeData.length; i++) {
-                                                var coffeeShop = {
-                                                    name: cafeData[i].name,
-                                                    coordinate: cafeData[i].point.coordinates,
-                                                    address: cafeData[i].Address.formattedAddress
+                                                if(!chainCafeList.includes(cafeData[i].name.toLowerCase())){
+                                                    var coffeeShop = {
+                                                        name: cafeData[i].name,
+                                                        coordinate: cafeData[i].point.coordinates,
+                                                        address: cafeData[i].Address.formattedAddress
+                                                    }
+                                                    coffeeShopsData.push(coffeeShop);
+                                                    showcoffeeShop(coffeeShop);
                                                 }
-                                                coffeeShopsData.push(coffeeShop);
-                                                showcoffeeShop(coffeeShop);
                                                 
                                             }
                                             var cityWordArray = cityName.split("%20");
@@ -224,7 +226,7 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("id", "today-weather")
     iconImage.setAttribute("src", "https://openweathermap.org/img/w/" + weatherObj.icon + ".png");
     iconImage.setAttribute("alt", "Weather icon")
-    temperatureEl.append(iconImage)
+    temperatureEl.appendChild(iconImage)
 }
 
 //This function adds the name and addresses of coffee shops to the page
@@ -327,6 +329,7 @@ function geocodeQuery(query) {
     //Make the geocode request.
     searchManager.geocode(searchRequest);
 }
+
 
 //This function shows the weather condition for current day
 function showWeatherSituation(weatherObj) {
