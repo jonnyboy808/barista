@@ -145,4 +145,9 @@
     height: 620px;
 }
 
+.cafe-info:hover{
+    box-shadow: 5px 5px 5px rgb(120, 63, 7);;
+    cursor: pointer;
+}
+
 
