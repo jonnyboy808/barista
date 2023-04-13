@@ -46,7 +46,7 @@
     <div class="column">
       <label class="label">Find the Best Coffee in any City</label>
       <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
-      <button class="button is-info mt-2 is-fullwidth" id="searchButton" onclick='Search()'>Search</button>
+      <button class="button is-info mt-2 is-fullwidth js-modal-trigger" data-target="modal-js-example" id="searchButton" onclick='Search()'>Search</button>
       <hr>
       
       <div class="listcontainer" id="searchHistory">
@@ -103,18 +103,9 @@
 </div> <!--transbox div-->
 </div>
 
-<div id="modal-js-example" class="modal">
-  <div class="modal-background"></div>
 
-  <div class="modal-content">
-    <div class="box">
-      <p>Modal JS example</p>
-      <!-- Your content -->
-    </div>
-  </div>
 
-  <button class="modal-close is-large" aria-label="close"></button>
-</div>
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"

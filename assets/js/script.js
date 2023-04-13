@@ -10,8 +10,6 @@ searchButton.addEventListener("click", handleSearch);
 
 /*var coffeeShopsEl = document.getElementById("coffeeShops");
 coffeeShopsEl.setAttribute("style", "none");*/
-
-function handleSearch() {
     var searchedCityValue = citySearch.value.trim();
     var cityWordArray = searchedCityValue.split(",");
     var cityName = cityWordArray[0];
@@ -31,7 +29,7 @@ function handleSearch() {
         citySearch.value = "";
         alert("A city name should be inserted!")
     }
-}
+
 //Bahareh
 //----------------------------------- Handle calling APIs  ---------------------------------
 function handleCallingApis(cityName) {
