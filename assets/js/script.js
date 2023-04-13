@@ -25,11 +25,6 @@ searchHistory.addEventListener("click", function (event) {
     }
 })
 
-coffeeShopsEl.addEventListener("click", function (event) {
-    var element = event.target;
-    var dataCoordinate = element.parentElement.parentElement.getAttribute("data-coordinate");
- //   geocodeQuery(dataCoordinate, false);
-})
 
 //------------------------------------------------------------------------
 refreshPage();
@@ -273,11 +268,11 @@ function Search(cityName) {
         var query = cityName;
         pins = [];
         locs = [];
-        geocodeQuery(query, true);
+        geocodeQuery(query);
     }
 }
 
-function geocodeQuery(query, allCoffeeShops) {
+function geocodeQuery(query) {
     var searchRequest = {
         where: query,
         callback: function (r) {
@@ -285,7 +280,6 @@ function geocodeQuery(query, allCoffeeShops) {
                 var pin;
 
                 //         var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
-                if (allCoffeeShops) {
                     for (var i = 0; i < coffeeShopsData.length; i++) {
                         //Create a pushpin for each result. 
                         var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
@@ -298,29 +292,6 @@ function geocodeQuery(query, allCoffeeShops) {
                         pins.push(pin);
                         locs.push(location);
                     }
-                }
-                else {
-                  /*  queryList = query.split(",");
-                    var location = new Microsoft.Maps.Location(queryList[0], queryList[1]);
-                    console.log(location);
-                    var cafeName = "";
-                    var cafeIndex = 0;
-                    for (var i = 0; i < coffeeShopsData.length; i++) {
-                        if ((coffeeShopsData[i].coordinate[0] == queryList[0]) && (coffeeShopsData[i].coordinate[1] == queryList[1])){
-                            cafeName = coffeeShopsData[i].name;
-                            cafeIndex = i + '';
-                        }
-                    }
-
-                    pin = new Microsoft.Maps.Pushpin(location, {
-                        title: cafeName,
-                        text: cafeIndex
-                    });
-
-                    pins.push(pin);
-                    locs.push(location);*/
-
-                }
                 map.entities.push(pins);
                 //Determine a bounding box to best view the results.
                 var bounds;
