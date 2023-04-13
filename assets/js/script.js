@@ -343,5 +343,20 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("alt", "Weather icon")
     temperatureEl.append(iconImage)
 }
+
+const barista = document.querySelector('.barista');
+anime({
+  targets: barista,
+  keyframes: [
+    {translateY: -20},
+    {translateX: 150},
+    {translateY: 40},
+    {translateX: 0},
+    {translateY: 0}
+  ],
+  duration: 4000,
+  easing: 'easeOutElastic(1, .8)',
+});
+
 // Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
 
