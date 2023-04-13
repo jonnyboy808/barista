@@ -27,7 +27,6 @@ The Barista webapp dynamically generates all your cafe searching needs based on 
 
 * [Code Example](#code-example)
 * [Usage](#usage)
-* [Learning Points](#learning-points)
 * [Author Info & Credits](#author-info-and-credits)
 * [License](#license)
 
@@ -99,15 +98,13 @@ The webapp also auto plays music when the page is initially loaded and will cont
 
 ![SoundCloud Widget](assets/images/music.png)
 
-Lastly on initial page load, the user's current city is automatically displayed in the map, with no need for the user to manually set their city after initial page load.
+On initial page load, the user's current city is automatically displayed in the map, with no need for the user to manually set their city after initial page load.
 ![Initial Page Load](assets/images/initial-load.png)
 
-Example of search function in action
+---
 ![Search function](assets/images/search-function.gif)
-## Learning Points 
+Example of search function in action
 
-
-"Add if desired"
 
 ---
 
@@ -126,7 +123,28 @@ Below is each contributors account/s.
 
 ## License
 
-License? [https://choosealicense.com/](https://choosealicense.com/)
+MIT License
+
+Copyright (c) 2023 jonnyboy808; CTep09; Bhmerir; osuchaya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
 ---
 
