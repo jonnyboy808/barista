@@ -99,12 +99,9 @@ The webapp also auto plays music when the page is initially loaded and will cont
 ![SoundCloud Widget](assets/images/music.png)
 
 On initial page load, the user's current city is automatically displayed in the map, with no need for the user to manually set their city after initial page load.
-On initial page load, the user's current city is automatically displayed in the map, with no need for the user to manually set their city after initial page load.
 ![Initial Page Load](assets/images/initial-load.png)
 
----
-![Search function](assets/images/search-function.gif)
-Example of search function in action
+## Learning Points 
 
 
 ---
