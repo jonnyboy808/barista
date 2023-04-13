@@ -14,6 +14,7 @@
 #myMap {
     height: 58%;
     width: 100%;
+    z-index: 1;
 }
 .recent {
     font-size: 23px;
@@ -116,7 +117,7 @@
 .flexbox {
     background-color: blanchedalmond;
     height: 100vh;
-} 
+}
 
 .box {
     padding: 0.75rem;
@@ -143,4 +144,5 @@
     padding-bottom: 0;
     height: 620px;
 }
+
 
