@@ -1,9 +1,11 @@
 var bingApiKey = "AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX"
 var weatherApiKey = "64013b468f23baa21fde4b13a3a2c029";
 
+var coffeeShopsData = [];
+
 var citySearch = document.getElementById("searchTbx");
 var searchButton = document.getElementById("searchButton");
-var searchHistory = document.getElementById("searchHistory")
+var searchHistory = document.getElementById("searchHistory");
 
 //https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=48.604311,-122.981998,5000&output=json&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX
 
@@ -107,9 +109,9 @@ function handleSearch() {
 
         // Call saveSearch function here
         saveSearch(cityName);
-
+        // Search(searchedCityValue);
         addSearchHistoryBtn(cityName);
-
+        coffeeShopsData = [];
         //Call APIs
         handleCallingApis(cityName);
     }
@@ -120,6 +122,7 @@ function handleSearch() {
 }
 //Bahareh
 //----------------------------------- Handle calling APIs  ---------------------------------
+
 function handleCallingApis(cityName) {
     var coordinates = [];
     var GeoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=" + weatherApiKey;
@@ -158,13 +161,16 @@ function handleCallingApis(cityName) {
                                     if (response.ok) {
                                         response.json().then(function (bingData) {
                                             var cafeData = bingData.resourceSets[0].resources;
+                                            console.log(cafeData);
                                             for (var i = 0; i < cafeData.length; i++) {
                                                 var coffeeShop = {
                                                     name: cafeData[i].name,
                                                     coordinate: cafeData[i].point.coordinates,
                                                     address: cafeData[i].Address.formattedAddress
                                                 }
+                                                coffeeShopsData.push(coffeeShop);
                                                 showcoffeeShop(coffeeShop);
+                                                Search(cityName)
                                             }
                                         });
                                     } else {
@@ -211,34 +217,41 @@ function showcoffeeShop(coffeeShop) {
     cafeInfo.setAttribute("class", "box cafe-info");
     var coffeeImage = "<img src='./assets/images/coffeeIcon.gif' alt='Coffee Image' width='30' height='30'>  ";
     console.log(coffeeImage)
-    cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name +" : </strong> " + coffeeShop.address;
+    cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name + " : </strong> " + coffeeShop.address;
     parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
 }
 //Bahareh
 
 var map, searchManager;
+var pins, locs = [];
 function GetMap() {
     map = new Microsoft.Maps.Map('#myMap', {
         credentials: bingApiKey,
     });
 }
 
-function Search() {
+function Search(cityName) {
     if (!searchManager) {
         //Create an instance of the search manager and perform the search.
         Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
             searchManager = new Microsoft.Maps.Search.SearchManager(map);
-            Search()
+            Search(cityName)
         });
     } else {
         //Remove any previous results from the map.
         map.entities.clear();
 
         //Get the users query and geocode it.
-        var query = document.getElementById('searchTbx').value;
+        var query = cityName;
+        pins = [];
+        locs = [];
         geocodeQuery(query);
     }
+}
+
+function test() {
+    
 }
 
 function geocodeQuery(query) {
@@ -246,24 +259,46 @@ function geocodeQuery(query) {
         where: query,
         callback: function (r) {
             if (r && r.results && r.results.length > 0) {
-                var pin, pins = [], locs = [], output = 'Results:<br/>';
+                var pin, output = 'Results:<br/>';
 
-               /* for (var i = 0; i < r.results.length; i++) {
+                var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
+                
+                for (var i = 0; i < coffeeShopsData.length; i++) {
                     //Create a pushpin for each result. 
-                    pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
+                    var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
+                    console.log(location);
+
+                    pin = new Microsoft.Maps.Pushpin(location, {
+                        title: coffeeShopsData[i].name,
                         text: i + ''
                     });
-                    pins.push(pin);
-                    locs.push(r.results[i].location);
 
-                    output += i + ') ' + r.results[i].name + '<br/>';
+                    pins.push(pin);
+                    locs.push(location);
+
+                    // output += i + ') ' + r.results[i].name + '<br/>';
                 }
+
+            //    for (var i = 0; i < r.results.length; i++) {
+            //         //Create a pushpin for each result. 
+            //         pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
+            //             text: i + ''
+            //         });
+            //         pins.push(pin);
+            //         locs.push(r.results[i].location);
+
+            //         // output += i + ') ' + r.results[i].name + '<br/>';
+            //     }
+                // console.log(pins);
 
                 //Add the pins to the map
                 map.entities.push(pins);
+                // Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
+                //     e.target.setOptions({ color: 'red' });
+                // });
 
                 //Display list of results
-                document.getElementById('output').innerHTML = output;*/
+                // document.getElementById('output').innerHTML = output;
 
                 //Determine a bounding box to best view the results.
                 var bounds;
