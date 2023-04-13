@@ -1,6 +1,6 @@
 .title {
     font-family: 'Bungee Shade', cursive;
-    padding-left: 1.5em;
+    padding-left: 1em;
 }
 
 #searchButton {
@@ -9,7 +9,7 @@
 
 /* jonathan */
 #myMap {
-    height: 40%;
+    height: 58%;
     width: 100%;
 }
 
@@ -17,6 +17,7 @@
 
 .container {
     padding: 0.5em;
+    padding-top: 0;
 }
 
 #weather {
@@ -27,12 +28,14 @@
 .hero-body {
     background-color: rgb(120, 63, 7);
     display: inline;
-    font-size: x-large;
+    font-size: large;
+    padding: 10px;
 }
 
 .listcontainer {
     list-style: none;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0;
 }
 
 .body {
@@ -50,7 +53,7 @@
 #coffeeShops {
     display: flex;
     flex-direction: column;
-    height: 300px;
+    height: 280px;
     box-shadow: 5px;
     border-radius: 5px;
     padding: 20px;
@@ -74,8 +77,8 @@
 .container {
     padding-top: 3em;
     z-index: 3;
-
-
+    margin-top: 10px;
+    padding-top: 0px;
 }
 
 .row col-xs col-xs {
@@ -85,7 +88,8 @@
 #soundcloud {
     height: 80px;
     width: 80px;
-
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .columns {
@@ -114,3 +118,17 @@
 .label{
     font-size: 24px;
 }
+.custom-header{
+    margin-bottom: 0;
+}
+
+.sound{
+    margin-top: 5px;
+}
+
+.second-column{
+    margin-top: 10px;
+    padding-bottom: 0;
+    height: 620px;
+}
+
