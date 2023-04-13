@@ -174,10 +174,11 @@ function handleCallingApis(cityName) {
                                                 }
                                                 coffeeShopsData.push(coffeeShop);
                                                 showcoffeeShop(coffeeShop);
-                                                var cityWordArray = cityName.split("%20");
+                                                
+                                            }
+                                            var cityWordArray = cityName.split("%20");
                                                 cityName = cityWordArray.join(" ");
                                                 Search(cityName)
-                                            }
                                         });
                                     } else {
                                         // alert("There is a connection error!")
@@ -230,7 +231,7 @@ function showWeatherSituation(weatherObj) {
 function showcoffeeShop(coffeeShop) {
     coffeeShopsEl.setAttribute("style", "overflow-y:auto; border:solid;");
     var parentEl = document.createElement("div");
-    parentEl.setAttribute("class", "row col-xs box row col-xs cafe");
+    parentEl.setAttribute("class", "box cafe");
     var coordinate = coffeeShop.coordinate[0] + "," + coffeeShop.coordinate[1];
     parentEl.setAttribute("data-coordinate", coordinate);
 
@@ -240,6 +241,18 @@ function showcoffeeShop(coffeeShop) {
     cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name + " : </strong> " + coffeeShop.address;
     parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
+    // console.log(coffeeShop)
+    parentEl.addEventListener('click', function(){
+        // console.log("click")
+        // console.log(this)
+        var coord = this.getAttribute("data-coordinate")
+        // console.log(coord)
+        var location = Microsoft.Maps.Location.parseLatLong(coord) //use coordinate 
+        // console.log(location)
+        map.setView({center:location, zoom:18})
+    
+        
+    })
 }
 
 var map, searchManager;
@@ -276,12 +289,12 @@ function geocodeQuery(query) {
             if (r && r.results && r.results.length > 0) {
                 var pin, output = 'Results:<br/>';
 
-                var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
-                
+                // var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
+                console.log(coffeeShopsData)
                 for (var i = 0; i < coffeeShopsData.length; i++) {
                     //Create a pushpin for each result. 
                     var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
-                    console.log(location);
+                    // console.log(location);
 
                     pin = new Microsoft.Maps.Pushpin(location, {
                         title: coffeeShopsData[i].name,
