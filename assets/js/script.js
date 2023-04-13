@@ -6,90 +6,81 @@ var coffeeShopsData = [];
 var citySearch = document.getElementById("searchTbx");
 var searchButton = document.getElementById("searchButton");
 var searchHistory = document.getElementById("searchHistory");
+var weatherEl = document.getElementById("weather");
+var coffeeShopsEl = document.getElementById("coffeeShops");
 
-//https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=48.604311,-122.981998,5000&output=json&key=AnKBT_bHZWYQ9X9Am43hr_EyNaxyCBhTtdofoHgmkd9TIr-VT6aPyLvXEaXrlBnX
+var chainCafeList = ["starbucks", "dunkin donuts", "caribou coffee", "dunn bros coffee", "tully's coffee",
+    "gloria jeans coffee", "mccafe", "lavazza", "peet's coffee"]
 
+//-----------------------event listeners----------------------------------
 searchButton.addEventListener("click", handleSearch);
 
-/*var coffeeShopsEl = document.getElementById("coffeeShops");
-coffeeShopsEl.setAttribute("style", "none");*/
+searchHistory.addEventListener("click", function(event){
+    var element = event.target;
+    if(element.matches(".history")){
+        var cityName = element.textContent;
+        Search(cityName);
+        handleCallingApis(cityName);
+    }
+})
 
-// function to make the previous search buttons addPreviousHistory
 
-
-// Refresh page function
-//  Get item from storage
+//------------------------------------------------------------------------
 refreshPage();
-
-function refreshPage() { 
+//This function when the page loads show the search history if exists
+function refreshPage() {
     var searchList = JSON.parse(localStorage.getItem("searchList"));
     if (!searchList) {
         searchHistory.setAttribute("style", "display: none;")
-        
+
     } else {
         searchHistory.setAttribute("style", "display: block;")
         for (var i = 0; i < searchList.length; i++) {
             addSearchHistoryBtn(searchList[i])
         }
-
     }
 }
-
+//This function adds a button for each searched city
 function addSearchHistoryBtn(cityName) {
+    searchHistory.setAttribute("style", "display: block;")
+    var cityWordArray = cityName.split("%20");
+    cityName = cityWordArray.join(" ");
     var cityBtn = document.createElement("button")
-    cityBtn.setAttribute("data-name", cityName)
     cityBtn.setAttribute("class", "button is-info mt-2 is-fullwidth history")
     cityBtn.textContent = cityName
     searchHistory.appendChild(cityBtn)
 
 }
-
-// call addPreviousHistory function here
-// function saveSearch()
+//This function brings the history of search from local storage
 function saveSearch(cityName) {
-    // var searchList = get item from local storage
     var searchList = JSON.parse(localStorage.getItem("searchList"));
     var cityWordArray = cityName.split("%20");
     cityName = cityWordArray.join(" ");
-    // if falsy then 
+    //if there is no history, an empty list is made and the item will be added to it
     if (!searchList) {
-        // searchList = [];
         searchList = [];
         searchList.push(cityName);
-        // addPreviousHistory() call function here
-        console.log(searchList);
-        // addPreviousHistory(searchList);
     }
-    //     if length < 3
-   else { 
-       if (searchList.includes(cityName)) {
-        return
-
-       }
-       
-       console.log(searchList);
+    else {
+        if (searchList.includes(cityName.trim())) {
+            return;
+        }
+        // if the search history list length has less then 3 items, the item will be added to it 
         if (searchList.length < 3) {
-            // push the city name to this array
             searchList.push(cityName);
         }
-        // remove first item in index 0 from list
-        //  else length is more than 3
         else {
+            /*if the search history list already has 3 items, the item in index 0 that is the oldest history 
+            will be deleted, and the recent search will be added to the list*/
+            
             searchList.shift();
-
-            // push cityName to the list 
-            searchList.push(cityName);
-
-            // you have to remove the button of item in index 0
-            // removeButton(0);
+            searchList.push(cityName);  
+            console.log(cityName);
+            //The oldest history button will be deleted    
+            searchHistory.children[1].remove();
         }
-        // save list in local storage
-        
-        // addPreviousHistory() function call here
-        // addPreviousHistory(searchList);
     }
-    
-    
+    addSearchHistoryBtn(cityName)
     localStorage.setItem("searchList", JSON.stringify(searchList));
 }
 
@@ -110,7 +101,6 @@ function handleSearch() {
         // Call saveSearch function here
         saveSearch(cityName);
         // Search(searchedCityValue);
-        addSearchHistoryBtn(cityName);
         coffeeShopsData = [];
         //Call APIs
         handleCallingApis(cityName);
@@ -120,13 +110,11 @@ function handleSearch() {
         alert("A city name should be inserted!")
     }
 }
-//Bahareh
 //----------------------------------- Handle calling APIs  ---------------------------------
 
 function handleCallingApis(cityName) {
     var coordinates = [];
     var GeoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=" + weatherApiKey;
-    console.log(GeoApiUrl)
     //This fetch brings the response about Geographical coordinates
     fetch(GeoApiUrl).then(function (response) {
         if (response.ok) {
@@ -148,8 +136,10 @@ function handleCallingApis(cityName) {
                         if (response.ok) {
                             response.json().then(function (todayData) {
                                 var tempFarenheit = parseFloat(((todayData.main.temp - 273) * 1.8) + 32).toFixed(2);
+                                var cityWordArray = cityName.split("%20");
+                                var searchedCityValue = cityWordArray.join(" ");
                                 var weatherCondition = {
-                                    city: cityName,
+                                    city: searchedCityValue,
                                     temp: tempFarenheit,
                                     icon: todayData.weather[0].icon
                                 }
@@ -160,6 +150,8 @@ function handleCallingApis(cityName) {
                                 fetch(bingApiUrl).then(function (response) {
                                     if (response.ok) {
                                         response.json().then(function (bingData) {
+                                            var coffeeShopsEl = document.getElementById("coffeeShops");
+                                            coffeeShopsEl.innerHTML = '';
                                             var cafeData = bingData.resourceSets[0].resources;
                                             console.log(cafeData);
                                             for (var i = 0; i < cafeData.length; i++) {
@@ -170,6 +162,8 @@ function handleCallingApis(cityName) {
                                                 }
                                                 coffeeShopsData.push(coffeeShop);
                                                 showcoffeeShop(coffeeShop);
+                                                var cityWordArray = cityName.split("%20");
+                                                cityName = cityWordArray.join(" ");
                                                 Search(cityName)
                                             }
                                         });
@@ -203,10 +197,9 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("alt", "Weather icon")
     temperatureEl.append(iconImage)
 }
+
 //This function adds the name and addresses of coffee shops to the page
 function showcoffeeShop(coffeeShop) {
-    console.log(coffeeShop)
-    var coffeeShopsEl = document.getElementById("coffeeShops");
     coffeeShopsEl.setAttribute("style", "overflow-y:auto; border:solid;");
     var parentEl = document.createElement("div");
     parentEl.setAttribute("class", "row col-xs box row col-xs cafe");
@@ -216,12 +209,10 @@ function showcoffeeShop(coffeeShop) {
     var cafeInfo = document.createElement("div");
     cafeInfo.setAttribute("class", "box cafe-info");
     var coffeeImage = "<img src='./assets/images/coffeeIcon.gif' alt='Coffee Image' width='30' height='30'>  ";
-    console.log(coffeeImage)
     cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name + " : </strong> " + coffeeShop.address;
     parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
 }
-//Bahareh
 
 var map, searchManager;
 var pins, locs = [];
@@ -250,10 +241,6 @@ function Search(cityName) {
     }
 }
 
-function test() {
-    
-}
-
 function geocodeQuery(query) {
     var searchRequest = {
         where: query,
@@ -275,31 +262,8 @@ function geocodeQuery(query) {
 
                     pins.push(pin);
                     locs.push(location);
-
-                    // output += i + ') ' + r.results[i].name + '<br/>';
                 }
-
-            //    for (var i = 0; i < r.results.length; i++) {
-            //         //Create a pushpin for each result. 
-            //         pin = new Microsoft.Maps.Pushpin(r.results[i].location, {
-            //             text: i + ''
-            //         });
-            //         pins.push(pin);
-            //         locs.push(r.results[i].location);
-
-            //         // output += i + ') ' + r.results[i].name + '<br/>';
-            //     }
-                // console.log(pins);
-
-                //Add the pins to the map
                 map.entities.push(pins);
-                // Microsoft.Maps.Events.addHandler(pin, 'mouseover', function (e) {
-                //     e.target.setOptions({ color: 'red' });
-                // });
-
-                //Display list of results
-                // document.getElementById('output').innerHTML = output;
-
                 //Determine a bounding box to best view the results.
                 var bounds;
 
@@ -315,7 +279,7 @@ function geocodeQuery(query) {
         },
         errorCallback: function (e) {
             //If there is an error, alert the user about it.
-        //    alert("No results found.");
+            //    alert("No results found.");
         }
     };
 
@@ -323,9 +287,6 @@ function geocodeQuery(query) {
     searchManager.geocode(searchRequest);
 }
 
-
-
-//Bahareh
 //This function shows the weather condition for current day
 function showWeatherSituation(weatherObj) {
     var cityEl = document.getElementById("city");
@@ -338,6 +299,5 @@ function showWeatherSituation(weatherObj) {
     iconImage.setAttribute("alt", "Weather icon")
     temperatureEl.append(iconImage)
 }
-//Bahareh
 // Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
 
