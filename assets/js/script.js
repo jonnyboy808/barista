@@ -365,5 +365,4 @@ anime({
   duration: 4000,
   easing: 'easeOutElastic(1, .8)',
 });
-// Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
 
