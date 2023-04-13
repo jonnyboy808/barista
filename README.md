@@ -9,7 +9,11 @@
 | Microsoft Bing Map API    | [https://learn.microsoft.com/en-us/bingmaps/rest-services/](https://learn.microsoft.com/en-us/bingmaps/rest-services/) | 
 | OpenWeather API     | [https://openweathermap.org/current](https://openweathermap.org/current)      |   
 | SoundCloud Widget API | [https://developers.soundcloud.com/docs/api/html5-widget](https://developers.soundcloud.com/docs/api/html5-widget)     |
-Bulma Framework   | [https://bulma.io/documentation/](https://bulma.io/documentation/)    
+Bulma Framework   | [https://bulma.io/documentation/](https://bulma.io/documentation/)   |
+Google Fonts   | [https://fonts.google.com/](https://fonts.google.com/)  |
+Font Awesome  | [https://fontawesome.com/docs](https://fontawesome.com/docs)  |
+
+---
 
 ## Description 
 
@@ -24,40 +28,79 @@ The Barista webapp dynamically generates all your cafe searching needs based on 
 * [Code Example](#code-example)
 * [Usage](#usage)
 * [Learning Points](#learning-points)
-* [Author Info](#author-info)
+* [Author Info & Credits](#author-info-and-credits)
 * [License](#license)
 
 
 ## Code Example
 
 
-"Example of code if desired"
+Short example of bulma being implemented 
 ```html
-Example of html code
+  <div class="flexbox">
+  <div class="container">
+    <div class="columns is-two-fifths">
+      <div class="column">
+        <label class="label">Find the Best Coffee in any City</label>
+        <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
+        <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
 ```
 
-"Example of code if desired"
+Example of javascript code used to fetch coffee shop names and adresses
 ```JS
-Example of js code
+var bingApiUrl = "https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=" + coordinates[0] + "," + coordinates[1] + ",5000&key=" + bingApiKey;
+    fetch(bingApiUrl).then(function (response) {
+      if (response.ok) {
+      response.json().then(function (bingData) {
+        var coffeeShopsEl = document.getElementById("coffeeShops");
+          coffeeShopsEl.innerHTML = '';
+          var cafeData = bingData.resourceSets[0].resources;
+          console.log(cafeData);
+          for (var i = 0; i < cafeData.length; i++) {
+            var coffeeShop = {
+                name: cafeData[i].name,
+                coordinate: cafeData[i].point.coordinates,
+                address: cafeData[i].Address.formattedAddress
+            }
+                coffeeShopsData.push(coffeeShop);
+                showcoffeeShop(coffeeShop);
+                var cityWordArray = cityName.split("%20");
+                cityName = cityWordArray.join(" ");
+                Search(cityName)
+                }
+            })
+        }}
+    );
+                                
 ```
 
-"Example of code if desired"
+Short example of additional styling that was added after bulma layout
 ```css
-Example of css code
+#coffeeShops{
+    display:flex;
+    flex-direction:column;
+    height: 300px;
+    box-shadow: 5px;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 10px;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+}
 ```
 
 
 ## Usage 
 
-Once the deployed site link is clicked, the user can start their search for a new cafe using the search box by entering the city and state of their choosing. The page will dynamically update and display coffee shops of the inputed city, generating the name and adresses in a scroll list. That same search will also produce the current weather conditions of the city with no need to make an additional request.
-
-(add screenshot of webpage)
+Once the deployed site link is opened, the user can start their search for a new cafe using the search box by entering a city of their choosing. The page will dynamically update and display coffee shops of the inputed city, generating the name and adresses in a scroll list. That same search will also produce the current weather conditions of the city located in the top right of the page, which can be seen within the image below.
+![Fully Functional](assets/images/fully-functional.png)
 
 The webapp also auto plays music when the page is initially loaded and will continue to play following a set library playlist provided by SoundCloud®. The user can also control the music should they wish to pause or continue playing the sound.
-(add screenshot of soundcloud widget)
 
-Lastly on initial page load, the user's city is automatically displayed in the map, with no need for the user to manually set their city.
-(add screenshot of map example) ![alt text](assets/images/screenshot.png)
+![SoundCloud Widget](assets/images/music.png)
+
+Lastly on initial page load, the user's current city is automatically displayed in the map, with no need for the user to manually set their city after initial page load.
+![Initial Page Load](assets/images/initial-load.png)
 
 ## Learning Points 
 
@@ -66,7 +109,7 @@ Lastly on initial page load, the user's city is automatically displayed in the m
 
 ---
 
-## Author Info & Credits
+## Author Info and Credits
 
 An amazing amout of credit is due to the wonderful team that help bring this webpage to life
 Below is each contributors account/s.
