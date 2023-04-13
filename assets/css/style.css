@@ -149,3 +149,12 @@
     box-shadow: 5px 5px 5px rgb(120, 63, 7);;
     cursor: pointer;
 }
+#quote{
+    padding-top: 20px;
+    width: 500px;
+}
+
+#quote-title{
+    padding-top: 20px;
+    font-weight: bold;
+}
