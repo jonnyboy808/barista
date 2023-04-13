@@ -24,8 +24,6 @@ searchHistory.addEventListener("click", function (event) {
         coffeeShopsData = [];
     }
 })
-
-
 //------------------------------------------------------------------------
 refreshPage();
 //This function when the page loads show the search history if exists
@@ -111,7 +109,7 @@ function handleSearch() {
         // Added modal to alert user
         var searchAlertModal = document.getElementById('searchAlertModal');
         searchAlertModal.classList.add('is-active');
-        searchAlertModal.querySelector('.modal-close').addEventListener('click', function() {
+        searchAlertModal.querySelector('.modal-close').addEventListener('click', function () {
             searchAlertModal.classList.remove('is-active');
         })
     }
@@ -131,7 +129,7 @@ function handleCallingApis(cityName) {
                     citySearch.value = "";
                     var searchedCityModal = document.getElementById('searchedCityModal');
                     searchedCityModal.classList.add('is-active');
-                    searchedCityModal.querySelector('.modal-close').addEventListener('click', function() {
+                    searchedCityModal.querySelector('.modal-close').addEventListener('click', function () {
                         searchedCityModal.classList.remove('is-active');
                     })
 
@@ -141,7 +139,6 @@ function handleCallingApis(cityName) {
                     coordinates.push(geoData[0].lat);
                     coordinates.push(geoData[0].lon);
                     //call the map api to show the curent city
-                    // loadMapScenario();
                     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + coordinates[0] + "&lon=" + coordinates[1] + "&appid=" + weatherApiKey;
                     //This fetch brings the response about today's weather
                     fetch(weatherApiUrl).then(function (response) {
@@ -165,9 +162,8 @@ function handleCallingApis(cityName) {
                                             var coffeeShopsEl = document.getElementById("coffeeShops");
                                             coffeeShopsEl.innerHTML = '';
                                             var cafeData = bingData.resourceSets[0].resources;
-                                            console.log(cafeData);
                                             for (var i = 0; i < cafeData.length; i++) {
-                                                if(!chainCafeList.includes(cafeData[i].name.toLowerCase())){
+                                                if (!chainCafeList.includes(cafeData[i].name.toLowerCase())) {
                                                     var coffeeShop = {
                                                         name: cafeData[i].name,
                                                         coordinate: cafeData[i].point.coordinates,
@@ -176,11 +172,12 @@ function handleCallingApis(cityName) {
                                                     coffeeShopsData.push(coffeeShop);
                                                     showcoffeeShop(coffeeShop);
                                                 }
-                                                
+
                                             }
                                             var cityWordArray = cityName.split("%20");
                                             cityName = cityWordArray.join(" ");
                                             Search(cityName);
+                                            //This fetch brings a random quote
                                             var quoteApiUrl = "https://api.quotable.io/random?maxLength=120";
                                             fetch(quoteApiUrl).then(function (response) {
                                                 if (response.ok) {
@@ -192,17 +189,25 @@ function handleCallingApis(cityName) {
                                                         quoteTitleEl.textContent = "Quote of the day :";
                                                     });
                                                 }
+                                                else {
+                                                    // alert("There is a connection error!")
+                                                    var connectionError = document.getElementById('connectionError');
+                                                    connectionError.classList.add('is-active');
+                                                    connectionError.querySelector('modal-close').addEventListener('click', function () {
+                                                        connectionError.classList.remove('is-active');
+                                                    })
+                                                }
                                             });
                                         });
-                                        
+
                                     } else {
                                         // alert("There is a connection error!")
                                         var connectionError = document.getElementById('connectionError');
                                         connectionError.classList.add('is-active');
-                                        connectionError.querySelector('modal-close').addEventListener('click', function() {
+                                        connectionError.querySelector('modal-close').addEventListener('click', function () {
                                             connectionError.classList.remove('is-active');
                                         })
-                                        
+
                                     }
                                 });
                             });
@@ -210,7 +215,7 @@ function handleCallingApis(cityName) {
                             // alert("There is a connection error!")
                             var connectionError = document.getElementById('connectionError');
                             connectionError.classList.add('is-active');
-                            connectionError.querySelector('modal-close').addEventListener('click', function() {
+                            connectionError.querySelector('modal-close').addEventListener('click', function () {
                                 connectionError.classList.remove('is-active');
                             })
                         }
@@ -221,7 +226,7 @@ function handleCallingApis(cityName) {
             // alert("There is a connection error!")
             var connectionError = document.getElementById('connectionError');
             connectionError.classList.add('is-active');
-            connectionError.querySelector('modal-close').addEventListener('click', function() {
+            connectionError.querySelector('modal-close').addEventListener('click', function () {
                 connectionError.classList.remove('is-active');
             })
         }
@@ -256,17 +261,10 @@ function showcoffeeShop(coffeeShop) {
     cafeInfo.innerHTML = coffeeImage + "<strong>" + coffeeShop.name + " : </strong> " + coffeeShop.address;
     parentEl.appendChild(cafeInfo);
     coffeeShopsEl.appendChild(parentEl);
-    // console.log(coffeeShop)
-    parentEl.addEventListener('click', function(){
-        // console.log("click")
-        // console.log(this)
+    parentEl.addEventListener('click', function () {
         var coord = this.getAttribute("data-coordinate")
-        // console.log(coord)
         var location = Microsoft.Maps.Location.parseLatLong(coord) //use coordinate 
-        // console.log(location)
-        map.setView({center:location, zoom:18})
-    
-        
+        map.setView({ center: location, zoom: 18 })
     })
 }
 
@@ -304,13 +302,10 @@ function geocodeQuery(query) {
             if (r && r.results && r.results.length > 0) {
                 var pin, output = 'Results:<br/>';
 
-                // var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
-                console.log(coffeeShopsData)
                 for (var i = 0; i < coffeeShopsData.length; i++) {
                     //Create a pushpin for each result. 
                     var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
-                    // console.log(location);
-
+            
                     pin = new Microsoft.Maps.Pushpin(location, {
                         title: coffeeShopsData[i].name,
                         text: i + ''
@@ -335,7 +330,6 @@ function geocodeQuery(query) {
         },
         errorCallback: function (e) {
             //If there is an error, alert the user about it.
-            //    alert("No results found.");
         }
     };
 
@@ -371,5 +365,4 @@ anime({
   duration: 4000,
   easing: 'easeOutElastic(1, .8)',
 });
-// Weather widget only visible when city entered in search bar or when city from previously searched list is clicked
 
