@@ -48,6 +48,41 @@
           <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
           <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
           <hr>
+        
+        <!-- Modal for Search alert -->
+        <div id="searchAlertModal" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <div class="box">
+              <p>The searched city is not found!</p>
+            </div>
+          </div>
+          <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <!-- Modal for incorrect city input -->
+        <div id="searchedCityModal" class="modal">
+        <div class="modal-background"></div>
+       <div class="modal-content">
+       <div class="box">
+        <p>City Name Not Found</p>
+         </div>
+       </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+
+        <!-- Modal for connection error  -->
+        <div id="connectionError" class="modal">
+        <div class="modal-background"></div>
+       <div class="modal-content">
+       <div class="box">
+        <p>City Name Not Found</p>
+         </div>
+       </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+
+
 
           <ul class="listcontainer" id="searchHistory">
             <span>
