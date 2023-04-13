@@ -179,9 +179,22 @@ function handleCallingApis(cityName) {
                                                 
                                             }
                                             var cityWordArray = cityName.split("%20");
-                                                cityName = cityWordArray.join(" ");
-                                                Search(cityName)
+                                            cityName = cityWordArray.join(" ");
+                                            Search(cityName);
+                                            var quoteApiUrl = "https://api.quotable.io/random?maxLength=120";
+                                            fetch(quoteApiUrl).then(function (response) {
+                                                if (response.ok) {
+                                                    response.json().then(function (quoteData) {
+                                                        var quote = quoteData.content;
+                                                        var quoteEl = document.getElementById("quote");
+                                                        quoteEl.textContent = quote;
+                                                        var quoteTitleEl = document.getElementById("quote-title");
+                                                        quoteTitleEl.textContent = "Quote of the day :";
+                                                    });
+                                                }
+                                            });
                                         });
+                                        
                                     } else {
                                         // alert("There is a connection error!")
                                         var connectionError = document.getElementById('connectionError');
