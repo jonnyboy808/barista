@@ -15,15 +15,21 @@ var chainCafeList = ["starbucks", "dunkin donuts", "caribou coffee", "dunn bros 
 //-----------------------event listeners----------------------------------
 searchButton.addEventListener("click", handleSearch);
 
-searchHistory.addEventListener("click", function(event){
+searchHistory.addEventListener("click", function (event) {
     var element = event.target;
-    if(element.matches(".history")){
+    if (element.matches(".history")) {
         var cityName = element.textContent;
         Search(cityName);
         handleCallingApis(cityName);
+        coffeeShopsData = [];
     }
 })
 
+coffeeShopsEl.addEventListener("click", function (event) {
+    var element = event.target;
+    var dataCoordinate = element.parentElement.parentElement.getAttribute("data-coordinate");
+ //   geocodeQuery(dataCoordinate, false);
+})
 
 //------------------------------------------------------------------------
 refreshPage();
@@ -72,10 +78,9 @@ function saveSearch(cityName) {
         else {
             /*if the search history list already has 3 items, the item in index 0 that is the oldest history 
             will be deleted, and the recent search will be added to the list*/
-            
+
             searchList.shift();
-            searchList.push(cityName);  
-            console.log(cityName);
+            searchList.push(cityName);
             //The oldest history button will be deleted    
             searchHistory.children[1].remove();
         }
@@ -160,6 +165,7 @@ function handleCallingApis(cityName) {
                                                     coordinate: cafeData[i].point.coordinates,
                                                     address: cafeData[i].Address.formattedAddress
                                                 }
+                                                console.log(coffeeShop)
                                                 coffeeShopsData.push(coffeeShop);
                                                 showcoffeeShop(coffeeShop);
                                                 var cityWordArray = cityName.split("%20");
@@ -237,31 +243,53 @@ function Search(cityName) {
         var query = cityName;
         pins = [];
         locs = [];
-        geocodeQuery(query);
+        geocodeQuery(query, true);
     }
 }
 
-function geocodeQuery(query) {
+function geocodeQuery(query, allCoffeeShops) {
     var searchRequest = {
         where: query,
         callback: function (r) {
             if (r && r.results && r.results.length > 0) {
-                var pin, output = 'Results:<br/>';
+                var pin;
 
-                var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
-                
-                for (var i = 0; i < coffeeShopsData.length; i++) {
-                    //Create a pushpin for each result. 
-                    var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
+                //         var location = new Microsoft.Maps.Location(coffeeShopsData[1].coordinate[0], coffeeShopsData[1].coordinate[1]);
+                if (allCoffeeShops) {
+                    for (var i = 0; i < coffeeShopsData.length; i++) {
+                        //Create a pushpin for each result. 
+                        var location = new Microsoft.Maps.Location(coffeeShopsData[i].coordinate[0], coffeeShopsData[i].coordinate[1]);
+
+                        pin = new Microsoft.Maps.Pushpin(location, {
+                            title: coffeeShopsData[i].name,
+                            text: i + ''
+                        });
+
+                        pins.push(pin);
+                        locs.push(location);
+                    }
+                }
+                else {
+                  /*  queryList = query.split(",");
+                    var location = new Microsoft.Maps.Location(queryList[0], queryList[1]);
                     console.log(location);
+                    var cafeName = "";
+                    var cafeIndex = 0;
+                    for (var i = 0; i < coffeeShopsData.length; i++) {
+                        if ((coffeeShopsData[i].coordinate[0] == queryList[0]) && (coffeeShopsData[i].coordinate[1] == queryList[1])){
+                            cafeName = coffeeShopsData[i].name;
+                            cafeIndex = i + '';
+                        }
+                    }
 
                     pin = new Microsoft.Maps.Pushpin(location, {
-                        title: coffeeShopsData[i].name,
-                        text: i + ''
+                        title: cafeName,
+                        text: cafeIndex
                     });
 
                     pins.push(pin);
-                    locs.push(location);
+                    locs.push(location);*/
+
                 }
                 map.entities.push(pins);
                 //Determine a bounding box to best view the results.
