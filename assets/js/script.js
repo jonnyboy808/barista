@@ -103,7 +103,7 @@ function handleSearch() {
         for (var i = 0; i < arr.length; i++) {
             arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
         }
-        cityName = arr.join("%20");
+        cityName = arr.join(" ");
         cityWordArray[0] = cityName;
         cityName = cityWordArray.join(",");
 
@@ -150,7 +150,7 @@ function handleCallingApis(cityName) {
                                 var tempFarenheit = parseFloat(((todayData.main.temp - 273) * 1.8) + 32).toFixed(2);
                                 var weatherCondition = {
                                     city: cityName,
-                                    temp: tempFarenheit,
+                                    temp: tempFarenheit + "ºF",
                                     icon: todayData.weather[0].icon
                                 }
                                 showWeatherSituation(weatherCondition)
