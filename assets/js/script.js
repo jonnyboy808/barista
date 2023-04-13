@@ -196,7 +196,7 @@ function showWeatherSituation(weatherObj) {
     var cityEl = document.getElementById("city");
     var temperatureEl = document.getElementById("temperature");
     cityEl.textContent = weatherObj.city;
-    temperatureEl.textContent = "temperatue: " + weatherObj.temp;
+    temperatureEl.textContent = "Temperature: " + weatherObj.temp;
     var iconImage = document.createElement("img");
     iconImage.setAttribute("id", "today-weather")
     iconImage.setAttribute("src", "https://openweathermap.org/img/w/" + weatherObj.icon + ".png");
@@ -331,7 +331,7 @@ function showWeatherSituation(weatherObj) {
     var cityEl = document.getElementById("city");
     var temperatureEl = document.getElementById("temperature");
     cityEl.textContent = weatherObj.city;
-    temperatureEl.textContent = "temperatue: " + weatherObj.temp;
+    temperatureEl.textContent = "Temperature: " + weatherObj.temp;
     var iconImage = document.createElement("img");
     iconImage.setAttribute("id", "today-weather")
     iconImage.setAttribute("src", "https://openweathermap.org/img/w/" + weatherObj.icon + ".png");
