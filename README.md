@@ -71,7 +71,7 @@ JS: create function that pulls current weather conditions to display on HTML
 ## Code Example
 
 
-### Short example of bulma being implemented 
+### Short example of Bulma being implemented 
 ```html
   <div class="flexbox">
   <div class="container">
@@ -81,6 +81,11 @@ JS: create function that pulls current weather conditions to display on HTML
         <input class="input is-normal" id="searchTbx" type="text" placeholder="City, State">
         <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
 ```
+
+#### Bulma Responsive Design
+
+![Bulma](./assets/images/responsive-design.gif)
+
 
 ### Example of javascript code used to fetch coffee shop names and addresses from Bing Map API
 ```JS
@@ -257,6 +262,9 @@ On initial page load, the user's current city is automatically displayed in the 
 
 ## Learning Points 
 
+The authors have learned to do research into API and server-side API independent of assistance and learned to overcome issues of implementation if there were any. We also learned to pivot to use alternative API providers to fit our user story. Problem-solving minds were needed in developing application as a group.
+We have learned to tie different information from different API to make useful applications that can be used in real life.
+We have explored and found that there are numerous resources that we can use and how we can improve our applications for the future. We have also learned how to implement agile working practices and to overcome issues such as Git merge conflicts.
 
 ---
 
