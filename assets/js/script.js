@@ -96,8 +96,6 @@ function handleSearch() {
         cityWordArray[0] = cityName;
         cityName = cityWordArray.join(",");
 
-        // Call saveSearch function here
-        saveSearch(cityName);
         // Search(searchedCityValue);
         coffeeShopsData = [];
         //Call APIs
@@ -138,6 +136,8 @@ function handleCallingApis(cityName) {
                     //If city is found, its longitude and lattitude will be retrieved and sent to the weather API
                     coordinates.push(geoData[0].lat);
                     coordinates.push(geoData[0].lon);
+                    // Call saveSearch function here
+                    saveSearch(cityName);
                     //call the map api to show the curent city
                     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + coordinates[0] + "&lon=" + coordinates[1] + "&appid=" + weatherApiKey;
                     //This fetch brings the response about today's weather
@@ -149,7 +149,7 @@ function handleCallingApis(cityName) {
                                 var searchedCityValue = cityWordArray.join(" ");
                                 var weatherCondition = {
                                     city: searchedCityValue,
-                                    temp: tempFarenheit + "ºF",
+                                    temp: tempFarenheit + " ºF",
                                     icon: todayData.weather[0].icon
                                 }
                                 showWeatherSituation(weatherCondition)
@@ -177,15 +177,17 @@ function handleCallingApis(cityName) {
                                             var cityWordArray = cityName.split("%20");
                                             cityName = cityWordArray.join(" ");
                                             Search(cityName);
+                                            var quoteEl = document.getElementById("quote");
+                                            quoteEl.textContent = "";
+                                            var quoteTitleEl = document.getElementById("quote-title");
+                                            quoteTitleEl.textContent = "";
                                             //This fetch brings a random quote
                                             var quoteApiUrl = "https://api.quotable.io/random?maxLength=120";
                                             fetch(quoteApiUrl).then(function (response) {
                                                 if (response.ok) {
                                                     response.json().then(function (quoteData) {
                                                         var quote = quoteData.content;
-                                                        var quoteEl = document.getElementById("quote");
                                                         quoteEl.textContent = quote;
-                                                        var quoteTitleEl = document.getElementById("quote-title");
                                                         quoteTitleEl.textContent = "Quote of the day :";
                                                     });
                                                 }
