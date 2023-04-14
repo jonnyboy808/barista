@@ -8,20 +8,56 @@
 | ------------- |:-------------:| 
 | Microsoft Bing Map API    | [https://learn.microsoft.com/en-us/bingmaps/rest-services/](https://learn.microsoft.com/en-us/bingmaps/rest-services/) | 
 | OpenWeather API     | [https://openweathermap.org/current](https://openweathermap.org/current)      |   
-| SoundCloud Widget API | [https://developers.soundcloud.com/docs/api/html5-widget](https://developers.soundcloud.com/docs/api/html5-widget)     |
+| SoundCloud Widget Library | [https://developers.soundcloud.com/docs/api/html5-widget](https://developers.soundcloud.com/docs/api/html5-widget)     |
 | Bulma Framework   | [https://bulma.io/documentation/](https://bulma.io/documentation/)   |
 | Google Fonts   | [https://fonts.google.com/](https://fonts.google.com/)  |
 | Font Awesome  | [https://fontawesome.com/docs](https://fontawesome.com/docs)  |
-| animejs  | [https://animejs.com/documentation/](https://animejs.com/documentation/) |
-| Quotable.io API | [https://github.com/lukePeavey/quotable](https://github.com/lukePeavey/quotable) |
+| Anime.js  | [https://animejs.com/documentation/](https://animejs.com/documentation/) |
+| Quotable API | [https://github.com/lukePeavey/quotable](https://github.com/lukePeavey/quotable) |
 ---
 
 ## Description 
 
 [Visit the Deployed Site](https://jonnyboy808.github.io/barista/)
 
-The barista webapp dynamically generates all your cafe searching needs based on user input. On initial page load the user's is greeted by barista's animated logo using the animejs library and current city is displayed in the map produced by Bing™. This webapp will display a list of the names and addresss of cafes when a user inputs a city of their choice within the seach box. When the user clicks on the search button or previously searched cities, a randomly generated quote of the day will display at the top of the page. The user is also greeted by music that auto plays when the page loads and also auto plays the next song on the playlist to set the mood when searching for their next cafe. Additionally if the user chooses, they may pause and resume the music as they wish. The weather of the inputed searched city is also displayed above the map to make for a better convinence before the user decides to head out to their new chosen cafe.
+The barista webapp dynamically generates all your cafe searching needs based on user input. On initial page load the user's is greeted by barista's animated logo using the Anime.js library and current city is displayed in the map produced by Bing™. This webapp will display a list of the names and addresses of cafes when a user inputs a city of their choice within the search box. When the user clicks on the search button or previously searched cities, a randomly generated quote of the day will display at the top of the page. The user is also greeted by music that auto plays when the page loads and also auto plays the next song on the playlist to set the mood when searching for their next cafe. Additionally if the user chooses, they may pause and resume the music as they wish. The weather of the inputted searched city is also displayed above the map to make for a better convenience before the user decides to head out to their new chosen cafe.
 
+## User Stories
+``` 
+1 User
+To find new coffee shops when I search for a specific city
+So that I could discover new alternatives (Starbucks)
+HTML:  Map interface,
+Input field for search bar
+JS: call bing map API to bring all the nearby coffee shops
+
+2 User
+Use the search bar to find a specific city
+I find local coffee shops only in that area
+HTML: there is a container
+JS: add dynamically a list of coffee shops to the existing container
+
+3 User
+Previous searches available to me
+I can find my searches quickly and easily
+HTML: add 3 searched locations
+JS: save and retrieve local storage
+
+4 User
+To be greeted with coffee shop music
+So that I can relax and get into the coffee mood
+HTML: soundCloud element to display music
+JS: create function to pull a specific genre of music to play
+
+5 User
+To show today’s
+weather
+I can plan my trip to coffee shop
+HTML: weather widget to show current weather
+JS: create function that pulls current weather conditions to display on HTML
+```
+
+![User Stories Finished Product](./assets/images/barista-site-in-action.gif)
 
 
 ## Table of Contents
@@ -35,7 +71,7 @@ The barista webapp dynamically generates all your cafe searching needs based on 
 ## Code Example
 
 
-Short example of bulma being implemented 
+### Short example of Bulma being implemented 
 ```html
   <div class="flexbox">
   <div class="container">
@@ -46,7 +82,12 @@ Short example of bulma being implemented
         <button class="button is-info mt-2 is-fullwidth" id="searchButton">Search</button>
 ```
 
-Example of javascript code used to fetch coffee shop names and adresses
+#### Bulma Responsive Design
+
+![Bulma](./assets/images/responsive-design.gif)
+
+
+### Example of javascript code used to fetch coffee shop names and addresses from Bing Map API
 ```JS
 var bingApiUrl = "https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&userLocation=" + coordinates[0] + "," + coordinates[1] + ",5000&key=" + bingApiKey;
     fetch(bingApiUrl).then(function (response) {
@@ -73,8 +114,126 @@ var bingApiUrl = "https://dev.virtualearth.net/REST/v1/LocalSearch/?query=cafe&u
     );
                                 
 ```
+#### Bing Map API call in action
+![Bing API Search Gif](./assets/images/search-function.gif)
 
-Short example of additional styling that was added after bulma layout
+### Calling Open Weather Map API 
+``` js
+function handleCallingApis(cityName) {
+    var coordinates = [];
+    var GeoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=" + weatherApiKey;
+    //This fetch brings the response about Geographical coordinates
+    fetch(GeoApiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (geoData) {
+                //If the city is not found, the length of data list will be empty
+                if (geoData.length === 0) {
+                    // alert("The searched city is not found!");
+                    citySearch.value = "";
+                    var searchedCityModal = document.getElementById('searchedCityModal');
+                    searchedCityModal.classList.add('is-active');
+                    searchedCityModal.querySelector('.modal-close').addEventListener('click', function () {
+                        searchedCityModal.classList.remove('is-active');
+                    })
+
+                }
+                else {
+                    //If city is found, its longitude and lattitude will be retrieved and sent to the weather API
+                    coordinates.push(geoData[0].lat);
+                    coordinates.push(geoData[0].lon);
+                    // Call saveSearch function here
+                    saveSearch(cityName);
+                    //call the map api to show the curent city
+                    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + coordinates[0] + "&lon=" + coordinates[1] + "&appid=" + weatherApiKey;
+                    //This fetch brings the response about today's weather
+                    fetch(weatherApiUrl).then(function (response) {
+                        if (response.ok) {
+                            response.json().then(function (todayData) {
+                                var tempFarenheit = parseFloat(((todayData.main.temp - 273) * 1.8) + 32).toFixed(2);
+                                var cityWordArray = cityName.split("%20");
+                                var searchedCityValue = cityWordArray.join(" ");
+                                var weatherCondition = {
+                                    city: searchedCityValue,
+                                    temp: tempFarenheit + " ºF",
+                                    icon: todayData.weather[0].icon
+                                }
+                                showWeatherSituation(weatherCondition)
+
+```
+
+#### Open Weather Map API call in action
+![Weather API Image](./assets/images/current_temp.png)
+
+
+### Quotable API Call
+``` js
+  var quoteEl = document.getElementById("quote");
+  quoteEl.textContent = "";
+  var quoteTitleEl = document.getElementById("quote-title");
+  quoteTitleEl.textContent = "";
+  //This fetch brings a random quote
+  var quoteApiUrl = "https://api.quotable.io/random?maxLength=120";
+  fetch(quoteApiUrl).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (quoteData) {
+        var quote = quoteData.content;
+        quoteEl.textContent = quote;
+        quoteTitleEl.textContent = "Quote of the day :";
+      });
+    }
+      else {
+        // alert("There is a connection error!")
+        var connectionError = document.getElementById('connectionError');
+        connectionError.classList.add('is-active');
+        connectionError.querySelector('modal-close').addEventListener('click', function () {
+        connectionError.classList.remove('is-active');
+      })
+    }
+    });
+  });
+```
+
+#### Quotable API call in action
+![Quotable API Image](./assets/images/quotable.gif)
+
+## Libraries Used
+### Soundcloud Library 
+``` html
+<div class="box" id="soundCloud">
+  <iframe width="100%" height="100" scrolling="no" frameborder="no" allow="autoplay"
+       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/483718232&color=%23be8d34&auto_play=true&sharing=false&hide_related=true&show_user=false&show_reposts=false&buying=false">
+   </iframe>
+   <div style="font-size: 8px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+        <a href="https://soundcloud.com/lofi-hip-hop-music/sets/lofi-hip-hop-beats" title="𝗟𝗢𝗙𝗜" target="_blank" style="color: #be8d34; text-decoration: overline;">𝗟𝗢𝗙𝗜</a>
+    </div>
+</div>
+```
+
+####  SoundCloud in action
+![Soundcloud](./assets/images/music.png)
+
+### Anime.js
+``` js
+const barista = document.querySelector('.barista');
+anime({
+  targets: barista,
+  keyframes: [
+    {translateY: -20},
+    {translateX: 75},
+    {translateY: 40},
+    {translateX: 0},
+    {translateY: 0}
+  ],
+  duration: 4000,
+  easing: 'easeOutElastic(1, .8)',
+});
+```
+
+#### Anime.js in action
+![Barista Logo Bouncing](./assets/images/barsta-anime.gif)
+
+
+Short example of additional styling that was added after Bulma layout
 ```css
 #coffeeShops{
     display:flex;
@@ -88,7 +247,6 @@ Short example of additional styling that was added after bulma layout
     text-overflow: ellipsis;
 }
 ```
-
 
 ## Usage 
 
@@ -104,6 +262,9 @@ On initial page load, the user's current city is automatically displayed in the 
 
 ## Learning Points 
 
+The authors have learned to do research into API and server-side API independent of assistance and learned to overcome issues of implementation if there were any. We also learned to pivot to use alternative API providers to fit our user story. Problem-solving minds were needed in developing application as a group.
+We have learned to tie different information from different API to make useful applications that can be used in real life.
+We have explored and found that there are numerous resources that we can use and how we can improve our applications for the future. We have also learned how to implement agile working practices and to overcome issues such as Git merge conflicts.
 
 ---
 
